@@ -1,6 +1,6 @@
 import React  from 'react';
 import './App.css';
-import Categories from './categories.component';
+import Categories from './pages/categories/categories.component';
 
 function App() {
   return (
