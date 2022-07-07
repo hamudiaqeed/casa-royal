@@ -1,15 +1,15 @@
 import React from "react";
 import './category.styles.scss';
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Category = ({ title, imageUrl, size, linkUrl }) => {
 
-    const navigate = useNavigate();
+    const history = useHistory();
 
     return (
         <div 
             className={`${size} menu-item`} 
-            onClick={() => navigate(linkUrl)}
+            onClick={() => history.push(linkUrl)}
         >
             <div 
                 className="background-image" 
