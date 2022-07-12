@@ -1,0 +1,29 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.8rem;
+    line-height: 1;
+    font-weight: 400;
+}
+
+html {
+    font-size: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a, a:hover {
+    transition: all .4s ease-in-out;
+}
