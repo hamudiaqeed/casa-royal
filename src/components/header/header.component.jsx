@@ -4,8 +4,9 @@ import logo from '../../assets/logo.jpg';
 import './header.styles.scss';
 import ReactWhatsapp from "react-whatsapp";
 import whatsapp from '../../assets/whatsapp.svg';
+import {auth} from '../../firebase/utils';
 
-const Header = () => {
+const Header = ({currentUser}) => {
     return (
         <div className="header">
             <div className="whatsapp">
@@ -28,6 +29,20 @@ const Header = () => {
                     <Link className="option" to="/contact">
                         CONTACT
                     </Link>
+                    {
+                        currentUser ? (
+                            <button className="option" onClick={() => auth.signOut()}>LOGOUT</button>
+                        ) : (
+                            <div>
+                                <Link className="option" to='/registration'>
+                                    REGISTER
+                                </Link>
+                                <Link className="option" to='/login'>
+                                    LOGIN
+                                </Link>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </div>
