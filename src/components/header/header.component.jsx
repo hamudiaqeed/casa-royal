@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {Link} from "react-router-dom";
 import logo from '../../assets/logo.jpg';
 import './header.styles.scss';
@@ -7,7 +7,14 @@ import ReactWhatsapp from "react-whatsapp";
 import whatsapp from '../../assets/whatsapp.svg';
 import {auth} from '../../firebase/utils';
 
-const Header = ({currentUser}) => {
+const mapState = ({user}) => ({
+    currentUser: user.currentUser
+});
+
+const Header = props => {
+
+    const { currentUser } = useSelector(mapState);
+
     return (
         <div className="header">
             <div className="whatsapp">
@@ -55,8 +62,4 @@ const Header = ({currentUser}) => {
     )
 }
 
-const mapStateToProps = ({user}) => ({
-    currentUser: user.currentUser
-});
-
-export default connect(mapStateToProps, null)(Header);
+export default Header;

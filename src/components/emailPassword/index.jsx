@@ -1,37 +1,46 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import AuthWrapper from '../authWrapper';
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import FormInput from '../forms/formInput/forminput.component';
+import { resetPassword, resetAllAuthForms } from "../../redux/user/user.actions";
 import Button from '../forms/button/button.component';
-import {auth} from '../../firebase/utils';
+
+const mapState = ({ user }) => ({
+    resetPasswordSuccess: user.resetPasswordSuccess,
+    resetPasswordError: user.resetPasswordError
+});
 
 const EmailPassword = () => {
 
     const history = useHistory();
-
-    const configAuthWrapper = {
-        headline: 'Email Password'
-    }
+    const { resetPasswordSuccess, resetPasswordError } = useSelector(mapState);
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = async (e) => {
+    useEffect(() => {
+        if(resetPasswordSuccess) {
+            dispatch(resetAllAuthForms());
+            history.push('/login');
+        }
+    }, [resetPasswordSuccess]);
+
+    useEffect(() => {
+        if(Array.isArray(resetPasswordError) && resetPasswordError.length > 0) {
+            setError(resetPasswordError)
+        }
+    }, [resetPasswordError]);
+
+    const handleSubmit = e => {
         e.preventDefault();
 
-        try {
-            const config = {
-                url: 'http://localhost:3000/login'
-            };
-            await auth.sendPasswordResetEmail(email, config)
-                .then(() => {
-                    history.push('/login');
-                }).catch(() => {
-                    setError('Email not found');
-                })
-        } catch (err) {
-            console.log(err);
-        }
+        dispatch(resetPassword({ email }));
+    }
+
+    const configAuthWrapper = {
+        headline: 'Email Password'
     }
 
     return (

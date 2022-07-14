@@ -13,13 +13,13 @@ import Registration from './pages/registration/registration';
 import Recovery from './pages/recovery/recovery';
 import {auth, handleUserProfile} from './firebase/utils';
 import { setCurrentUser } from './redux/user/user.actions';
-import {connect} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import WithAuth from './hoc/withAuth';
 
-const App = props => {
+const App = () => {
 
-  const { setCurrentUser, currentUser } = props;
+  const dispatch = useDispatch();
 
   useEffect(() => {
 
@@ -27,14 +27,14 @@ const App = props => {
       if(userAuth) {
         const userRef = await handleUserProfile(userAuth);
         userRef.onSnapshot(snapshot => {
-          setCurrentUser({
+          dispatch(setCurrentUser({
             id: snapshot.id,
             ...snapshot.data()
-          })
+          }));
         })
       } 
       
-      setCurrentUser(userAuth);
+      dispatch(setCurrentUser(userAuth));
     });
 
     return () => {
@@ -64,12 +64,4 @@ const App = props => {
   );
 }
 
-const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser
-});
-
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
