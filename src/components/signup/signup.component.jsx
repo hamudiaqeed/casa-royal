@@ -1,28 +1,23 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './signup.styles.scss';
 import FormInput from '../forms/formInput/forminput.component';
 import Button from '../forms/button/button.component';
+import AuthWrapper from '../authWrapper';
 import { auth, handleUserProfile } from '../../firebase/utils';
 
 const SignUp = (props) => {
 
-    const [information, setInformation] = useState({
-        displayName: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-    });
+    const [displayName, setDisplayName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setInformation({...information, [name]: value})
-    }
+    const history = useHistory();
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-
-        const {displayName, email, password, confirmPassword} = information;
 
         if (password !== confirmPassword) {
             const err = ["Passwords don't match"];
@@ -35,60 +30,60 @@ const SignUp = (props) => {
 
             await handleUserProfile(user, {displayName});
 
-            setInformation({
-                displayName: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-            })
+            setDisplayName('');
+            setEmail('');
+            setPassword('');
+            setConfirmPassword('');
+            history.push('/');
         } catch(err) {
             console.log(err)
         }
     }
 
+    const configAuthWrapper = {
+        headline: 'Registration'
+    }
+
     return (
-        <div className='signup'>
-            <div className='wrap'>
-                <h2>Sign up</h2>
+        <AuthWrapper {...configAuthWrapper}>
+            <div className='formWrap'>
                 {
                     error.length > 0 && error
                 }
-                <div className='formWrap'>
-                    <form onSubmit={handleFormSubmit}>
-                        <FormInput 
-                            type="text" 
-                            name="displayName" 
-                            value={information.displayName} 
-                            placeholder="Full name"
-                            onChange={(e) => handleChange(e)} 
-                        />
-                        <FormInput 
-                            type="email" 
-                            name="email" 
-                            value={information.email} 
-                            placeholder="Email"
-                            onChange={(e) => handleChange(e)} 
-                        />
-                        <FormInput 
-                            type="password" 
-                            name="password" 
-                            value={information.password} 
-                            placeholder="Enter Password"
-                            onChange={(e) => handleChange(e)} 
-                        />
-                        <FormInput 
-                            type="password" 
-                            name="confirmPassword" 
-                            value={information.confirmPassword} 
-                            placeholder="Confirm Password"
-                            onChange={(e) => handleChange(e)} 
-                        />
+                <form onSubmit={handleFormSubmit}>
+                    <FormInput 
+                        type="text" 
+                        name="displayName" 
+                        value={displayName} 
+                        placeholder="Full name"
+                        handleChange={(e) => setDisplayName(e.target.value)} 
+                    />
+                    <FormInput 
+                        type="email" 
+                        name="email" 
+                        value={email} 
+                        placeholder="Email"
+                        handleChange={(e) => setEmail(e.target.value)} 
+                    />
+                    <FormInput 
+                        type="password" 
+                        name="password" 
+                        value={password} 
+                        placeholder="Enter Password"
+                        handleChange={(e) => setPassword(e.target.value)} 
+                    />
+                    <FormInput 
+                        type="password" 
+                        name="confirmPassword" 
+                        value={confirmPassword} 
+                        placeholder="Confirm Password"
+                        handleChange={(e) => setConfirmPassword(e.target.value)} 
+                    />
 
-                        <Button type="submit">Register</Button>
-                    </form>
-                </div>
+                    <Button type="submit">Register</Button>
+                </form>
             </div>
-        </div>
+        </AuthWrapper>
     );
 }
 

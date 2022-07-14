@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux';
 import {Link} from "react-router-dom";
 import logo from '../../assets/logo.jpg';
 import './header.styles.scss';
@@ -31,7 +32,12 @@ const Header = ({currentUser}) => {
                     </Link>
                     {
                         currentUser ? (
-                            <button className="option" onClick={() => auth.signOut()}>LOGOUT</button>
+                            <div>
+                                <Link className="option" to='/dashboard'>
+                                    MY ACCOUNT
+                                </Link>
+                                <button className="option" onClick={() => auth.signOut()}>LOGOUT</button>
+                            </div>
                         ) : (
                             <div>
                                 <Link className="option" to='/registration'>
@@ -49,4 +55,8 @@ const Header = ({currentUser}) => {
     )
 }
 
-export default Header;
+const mapStateToProps = ({user}) => ({
+    currentUser: user.currentUser
+});
+
+export default connect(mapStateToProps, null)(Header);
