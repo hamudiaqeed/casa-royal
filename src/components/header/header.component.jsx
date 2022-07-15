@@ -1,11 +1,11 @@
 import React from "react";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { signOutUserStart } from '../../redux/user/user.actions';
 import {Link} from "react-router-dom";
 import logo from '../../assets/logo.jpg';
 import './header.styles.scss';
 import ReactWhatsapp from "react-whatsapp";
 import whatsapp from '../../assets/whatsapp.svg';
-import {auth} from '../../firebase/utils';
 
 const mapState = ({user}) => ({
     currentUser: user.currentUser
@@ -13,7 +13,12 @@ const mapState = ({user}) => ({
 
 const Header = props => {
 
+    const dispatch = useDispatch();
     const { currentUser } = useSelector(mapState);
+
+    const signOut = () => {
+        dispatch(signOutUserStart());
+    };
 
     return (
         <div className="header">
@@ -43,7 +48,7 @@ const Header = props => {
                                 <Link className="option" to='/dashboard'>
                                     MY ACCOUNT
                                 </Link>
-                                <button className="option" onClick={() => auth.signOut()}>LOGOUT</button>
+                                <button className="option" onClick={() => signOut()}>LOGOUT</button>
                             </div>
                         ) : (
                             <div>
