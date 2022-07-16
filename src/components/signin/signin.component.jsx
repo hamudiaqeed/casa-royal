@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './signin.styles.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { emailSignInStart, googleSignInStart } from '../../redux/user/user.actions';
-import Button from '../forms/button/button.component';
-import FormInput from '../forms/formInput/forminput.component';
+import { emailSignInStart, googleSignInStart } from '../../redux/User/user.actions';
+import Button from '../forms/Button/button.component';
+import FormInput from '../forms/FormInput/forminput.component';
 import { Link, useHistory } from 'react-router-dom';
-import AuthWrapper from '../authWrapper';
+import AuthWrapper from '../AuthWrapper/index';
 
 const mapState = ({user}) => ({
     currentUser: user.currentUser

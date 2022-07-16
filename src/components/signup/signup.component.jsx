@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './signup.styles.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { signUpUserStart } from '../../redux/user/user.actions';
-import FormInput from '../forms/formInput/forminput.component';
-import Button from '../forms/button/button.component';
-import AuthWrapper from '../authWrapper';
+import { signUpUserStart } from '../../redux/User/user.actions';
+import FormInput from '../forms/FormInput/forminput.component';
+import Button from '../forms/Button/button.component';
+import AuthWrapper from '../AuthWrapper';
 
 const mapState = ({user}) => ({
     currentUser: user.currentUser,

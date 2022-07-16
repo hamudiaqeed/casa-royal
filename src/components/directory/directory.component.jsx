@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Category from "../category/category.component";
+import Category from "../Category/category.component";
 import './directory.styles.scss';
 
 
@@ -7,35 +7,35 @@ const Directory = () => {
     const [category, setCategory] = useState([
         {
           title: 'Tapet',
-          imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+          imageUrl: 'https://i.dedeman.ro/media/catalog/product/cache/dedeman/image/9df78eab33525d08d6e5fb8d27136e95/8/0/8039411.jpg',
           id: 1,
-          linkUrl: 'hats'
+          linkUrl: 'search/tapet'
         },
         {
           title: 'Profile Decorative',
-          imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+          imageUrl: 'https://i.dedeman.ro/media/catalog/product/cache/dedeman/image/485x485/9df78eab33525d08d6e5fb8d27136e95/6/0/6019390_1.jpg?1656892800104',
           id: 2,
-          linkUrl: 'jackets'
+          linkUrl: 'search/profile'
         },
         {
           title: 'Mocheta',
-          imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+          imageUrl: 'https://cdn-mathaus.ro/medias/sys_master/images/hef/h2a/h00/8835755016222.png',
           id: 3,
-          linkUrl: 'sneakers'
+          linkUrl: 'search/mocheta'
         },
         {
           title: 'Vopsea Decorativa',
-          imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+          imageUrl: 'https://i.dedeman.ro/media/catalog/product/cache/dedeman/image/9df78eab33525d08d6e5fb8d27136e95/5/0/5018428_v8731-7_cordoba_-dark-purple_3.jpg',
           size: 'large',
           id: 4,
-          linkUrl: 'womens'
+          linkUrl: 'search/vopsea'
         },
         {
           title: 'Decoratiuni',
-          imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+          imageUrl: 'https://dclteam.ro/wp-content/uploads/2021/06/decoratiuni-interioare-800x800px-7.jpg',
           size: 'large',
           id: 5,
-          linkUrl: 'mens'
+          linkUrl: 'search/decoratiuni'
         }
     ]);
 

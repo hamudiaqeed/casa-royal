@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
-import AuthWrapper from '../authWrapper';
+import AuthWrapper from '../AuthWrapper/index';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import FormInput from '../forms/formInput/forminput.component';
-import { resetPasswordStart, resetUserState } from "../../redux/user/user.actions";
-import Button from '../forms/button/button.component';
+import FormInput from '../forms/FormInput/forminput.component';
+import { resetPasswordStart, resetUserState } from "../../redux/User/user.actions";
+import Button from '../forms/Button/button.component';
 
 const mapState = ({ user }) => ({
     resetPasswordSuccess: user.resetPasswordSuccess,

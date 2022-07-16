@@ -1,6 +1,6 @@
 import React from "react";
 import './recovery.styles.scss';
-import EmailPassword from "../../components/emailPassword/index.jsx";
+import EmailPassword from "../../components/EmailPassword";
 
 const Recovery = (props) => {
     return <EmailPassword />;

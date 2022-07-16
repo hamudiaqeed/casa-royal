@@ -1,25 +1,23 @@
 .header {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
-  
-  & div:last-child {
+  height: 10rem;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+
+  .wrap {
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    margin-top: 10px;
-    margin-bottom: 25px;
+    justify-content: space-around;
     height: 7.5rem;
-    
-    .logo-container {
+
+    .logo {
       width: 70px;
       padding: 25px;
+      img {
+        width: 60px;
+        height: auto;
+      }
     }
-  
-    .logo-container img {
-      width: 60px;
-      height: auto;
-    }
-  
-    .options {
+
+    .callToActions {
       width: 50%;
       height: 100%;
       display: flex;
@@ -30,31 +28,33 @@
         padding: 10px 15px;
       }
     }
+
   }
 
-  .whatsapp {
-    width: 100%;
-    display: inline-block;
+}
+
+.whatsapp {
+  width: 100%;
+  display: inline-block;
+  background-color: #25D366;
+  height: 30px;
+
+  button {
     background-color: #25D366;
+    border: none;
+    color: white;
+    width: 100%;
     height: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 
-    button {
-      background-color: #25D366;
-      border: none;
-      color: white;
-      width: 100%;
-      height: 30px;
-      cursor: pointer;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-
-      img {
-        width: 20px;
-        height: auto;
-      }
+    img {
+      width: 20px;
+      height: auto;
     }
   }
 }
