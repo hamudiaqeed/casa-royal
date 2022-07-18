@@ -6,20 +6,30 @@
     margin: 2rem auto;
   
     .productResults {
-      display: flex;
-      flex-wrap: wrap;
-      margin: 3rem -10px 0;
+      // display: flex;
+      // flex-wrap: wrap;
+      // margin: 3rem -10px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr; 
+      // grid-template-rows: 1fr 1fr 1fr; 
+      gap: 30px;
+      // grid-template-areas: 
+      // ". . ."
+      // ". . ."
+      // ". . ."; 
     }
   }
   
   .product {
-    width: 33.333333333333333%;
+    max-width: 350px;
     margin: 0 auto 2rem;
     padding: 0 10px;
+    border: 1px solid black;
   
     .thumb {
       display: block;
-      width: 100%;
+      width: 330px;
+      height: 330px;
   
       img {
         display: block;

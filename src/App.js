@@ -2,7 +2,7 @@ import React, { useEffect }  from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.scss';
 import Categories from './pages/Categories/categories.component';
-import HomePage from './pages/Homepage/homepage.component';
+import Footer from './components/Footer/footer.component';
 import ShopPage from './pages/Shop/shop.component';
 import Header from './components/Header/header.component';
 import About from './pages/About/about.component';
@@ -40,8 +40,7 @@ const App = () => {
       <AdminToolbar />
       <Header />
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/categories" component={Categories} />
+        <Route exact path="/" component={Categories} />
         <Route path="shop" component={ShopPage} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
@@ -87,6 +86,7 @@ const App = () => {
           </WithAuth>
         )} />
       </Switch>
+      {/* <Footer /> */}
     </div>
   );
 }

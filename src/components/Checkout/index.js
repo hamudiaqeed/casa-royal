@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCartItems, selectCartTotal } from './../../redux/Cart/cart.selectors';
+import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import './styles.scss';
 import Button from './../forms/Button/button.component';
@@ -16,7 +17,7 @@ const Checkout = ({ }) => {
   const history = useHistory();
   const { cartItems, total } = useSelector(mapState);
 
-  const errMsg = 'You have no items in your cart.';
+  const errMsg = 'Cosul tau este gol.';
 
   return (
     <div className="checkout">
@@ -116,9 +117,12 @@ const Checkout = ({ }) => {
             </tbody>
           </table>
         ) : (
-            <p>
-              {errMsg}
-            </p>
+            <div>
+              <p>
+                {errMsg}
+              </p>
+              <Link to='/search'>Cauta produse</Link>
+            </div>
           )}
       </div>
     </div>
