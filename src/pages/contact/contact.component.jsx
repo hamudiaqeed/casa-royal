@@ -8,17 +8,19 @@ import adresa5 from '../../assets/adresa5.PNG';
 const Contact = () => {
     return (
         <div className="contact">
+            <p className="contact-p">Lansat in 2007, conceptul Casa Royal s-a extins in permanenta datorita cererii clientilor din capitala si din alte orase. In acest moment, exista patru magazine in Bucuresti, Constanta si Craiova, iar planurile de extindere continua pentru ca ne dorim sa fim cat mai aproape de fiecare dintre clientii nostri.</p>
             <div className="locations">
-                <div>
+                <div className="location">
                     <div>
                         <h2>BUCURESTI - SHOWROOM NICOLAE TITULESCU</h2>
                         <p>Adresa: Sos. Nicolae Titulescu nr.121</p>
+                        <p>Persoana contact: Slabu Catalin</p>
                         <p>Telefon: 0736 948 334</p>
                         <p>Email: catalin.slabu@casaroyal.ro</p>
                     </div>
                     <img src={adresa1} alt="casa royal locatie" />
                 </div>
-                <div>
+                <div className="location">
                     <div>
                         <h2>BUCURESTI - SHOWROOM EXPO TOP CONSTRUCT</h2>
                         <p>Adresa: Valea Cascadelor nr. 23, sector 6 , stand A7O7</p>
@@ -28,7 +30,7 @@ const Contact = () => {
                     </div>
                     <img src={adresa24} alt="casa royal locatie" />
                 </div>
-                <div>
+                <div className="location">
                     <div>
                         <h2>BUCURESTI - SHOWROOM HOME&DESIGN MALL</h2>
                         <p>Adresa: Bulevardul Ghencea nr.126-132, sector 6</p>
@@ -38,7 +40,7 @@ const Contact = () => {
                     </div>
                     <img src={adresa3} alt="casa royal locatie" />
                 </div>
-                <div>
+                <div className="location">
                     <div>
                         <h2>BUCURESTI - SHOWROOM EXPO TOP CONSTRUCT</h2>
                         <p>Adresa: Valea Cascadelor nr. 23, sector 6 , stand B14C14</p>
@@ -48,7 +50,7 @@ const Contact = () => {
                     </div>
                     <img src={adresa24} alt="casa royal locatie" />
                 </div>
-                <div>
+                <div className="location">
                     <div>
                         <h2>CONSTANTA - SHOWROOM AUREL VLAICU</h2>
                         <p>Adresa: Str. Aurel Vlaicu nr 163A in incinta complex MYC/Hiastria</p>
@@ -71,7 +73,7 @@ const Contact = () => {
                     <input type="text" name="subiect" id="subiect" required />
                     <label htmlFor="mesaj">Mesaj</label>
                     <textarea type="text" name="mesaj" id="mesaj" rows="10" required />
-                    <div>
+                    <div className="check">
                         <input type="checkbox" name="tc" id="tc" required />
                         <label htmlFor="tc">Sunt de acord si accept Politica de Confidentialitate</label>
                     </div>

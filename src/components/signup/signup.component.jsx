@@ -66,7 +66,7 @@ const SignUp = () => {
                         type="text" 
                         name="displayName" 
                         value={displayName} 
-                        placeholder="Full name"
+                        placeholder="Nume"
                         handleChange={(e) => setDisplayName(e.target.value)} 
                     />
                     <FormInput 
@@ -80,18 +80,18 @@ const SignUp = () => {
                         type="password" 
                         name="password" 
                         value={password} 
-                        placeholder="Enter Password"
+                        placeholder="Parola"
                         handleChange={(e) => setPassword(e.target.value)} 
                     />
                     <FormInput 
                         type="password" 
                         name="confirmPassword" 
                         value={confirmPassword} 
-                        placeholder="Confirm Password"
+                        placeholder="Confirma Parola"
                         handleChange={(e) => setConfirmPassword(e.target.value)} 
                     />
 
-                    <Button type="submit">Register</Button>
+                    <Button type="submit">Confirma</Button>
                 </form>
             </div>
         </AuthWrapper>

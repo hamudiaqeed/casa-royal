@@ -56,7 +56,7 @@ const SignIn = () => {
                     <FormInput 
                         type="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Parola"
                         value={password}
                         handleChange={(e) => setPassword(e.target.value)}
                     />
@@ -64,12 +64,13 @@ const SignIn = () => {
                     <div className='socialSignin'>
                         <div className='row'>
                             <Button onClick={handleGoogleSignIn}>
-                                Sign in with Google
+                                Logare cu Google
                             </Button>
                         </div>
                     </div>
                     <div className='links'>
-                        <Link to="/recovery">Reset password</Link>
+                        <Link to="/recovery">Reseteaza parola</Link>
+                        <p>Nu ai cont? Creeaza unul <Link to="/registration" className='underline'> aici</Link></p>
                     </div>
                 </form>
             </div>

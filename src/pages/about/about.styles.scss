@@ -1,0 +1,33 @@
+.about {
+
+    padding: 30px;
+    
+    .about-1, .about-2, .partners-header {
+        width: 50%;
+        margin: 50px auto;
+    }
+
+    .about-p {
+        text-align: center;
+        margin: 50px;
+    }
+
+    .partners-list {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr; 
+        justify-items: center;
+        gap: 30px;
+        width: 50%;
+        margin: 0 auto;
+    
+        div {
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

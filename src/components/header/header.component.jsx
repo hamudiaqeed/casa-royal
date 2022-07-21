@@ -163,7 +163,7 @@ const Header = props => {
                                     <>
                                         <li>
                                             <Link to="/login">
-                                                Login
+                                                LOGIN
                                             </Link>
                                         </li>
                                     </>

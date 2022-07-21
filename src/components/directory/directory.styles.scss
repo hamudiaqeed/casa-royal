@@ -4,3 +4,87 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.beneficii {
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    // margin-top: 30px;
+
+    .benef-section {
+        width: 33.3333%;
+        display: flex;
+        padding: 20px;
+        gap: 10px;
+        border: 1px solid lightgray;
+
+        .benef-text {
+            h3 {
+                margin: 0;
+            }
+        }
+
+        p {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.parallax {
+    margin: 20px 0;
+    background-image: url("../../assets/82608.jpg");
+
+    min-height: 500px;
+    width: 100%;
+
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+    div {
+        border: 3px solid black;
+        width: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px;
+        background-color: black;
+        opacity: 0.7;
+
+        p {
+            z-index: 300;
+            font-size: 2rem;
+            line-height: 1.2;
+            color: white;
+        }
+    }
+}
+
+.avantaje {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .img-container{
+        width: 50%;
+        img {
+            width: 100%;
+        }
+    }
+
+    .avantaje-text {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px;
+            list-style: none;
+        }
+    }
+}

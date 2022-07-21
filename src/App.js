@@ -20,6 +20,7 @@ import Search from './pages/Search';
 import AdminToolbar from './components/AdminToolbar/admin.component';
 import { checkUserSession } from './redux/User/user.actions';
 import { useDispatch } from 'react-redux';
+import backgroundImg from './assets/82610.jpg';
 
 import WithAuth from './hoc/withAuth';
 import WithAdminAuth from './hoc/withAdminAuth';
@@ -37,6 +38,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <div className="backgroundImg"></div>
       <AdminToolbar />
       <Header />
       <Switch>
@@ -86,7 +88,7 @@ const App = () => {
           </WithAuth>
         )} />
       </Switch>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
