@@ -56,8 +56,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      background-color: rgba(29, 29, 29, 0.7);
+      // text-align: center;
+      background-color: rgba(48, 58, 71, 0.86);
       backdrop-filter: blur(2px);
       transform: translate(0);
       transition: 0.3s ease transform;
@@ -76,6 +76,7 @@
         display: flex;
         flex-direction: column;
         margin-bottom: 10px;
+        gap: 10px;
 
         @include breakpoint(md) {
           flex-direction: row;
@@ -91,25 +92,65 @@
           border-radius: 12px;
           transition: 0.3s ease all;
 
-          a {
-            text-decoration: none;
-            padding: 0.75rem 1.25rem;
-            transition: 0.3s ease all;
-            
-          }
+          // a {
+          //   text-decoration: none;
+          //   padding: 0.75rem 1.25rem;
+          //   transition: 0.3s ease all;
+          // }
 
-          a:hover {
-            color: #FFBF00;
-          }
-        
           &:active {
             border-radius: calc(12px + 6px);
             background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+          }
+
+          a {            
+            position: relative;
+  
+            &:before {
+              content: '';
+              position: absolute;
+              width: 0;
+              background: #FFBF00;
+              height: 2px;
+              bottom: 0;
+              left: 0;
+              border-radius: 15px;
+              z-index: -1;
+              transition: .2s linear;
+            }
+  
+            &:hover::before {
+              width: 100%;
+            }
           }
         }
       }
       &.isMenu {
         transform: translate(100%);
+        a {
+          color: white;
+          font-size: 30px;
+          font-weight: 700;
+          position: relative;
+
+          &:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 10px;
+            background: #FFBF00;
+            height: 5px;
+            bottom: 0;
+            left: 0;
+            border-radius: 15px;
+            z-index: -1;
+            transition: .2s linear;
+          }
+
+          &:hover::before {
+            width: 100%;
+          }
+        }
       }
     }
 
@@ -209,5 +250,20 @@
 .MuiButtonBase-root.MuiButton-root.MuiButton-text {
   &:hover {
     background-color: transparent;
+  }
+}
+
+@media only screen and (max-width: 1068px) {
+  .header__content-nav {
+    ul {
+      li {
+
+        padding: 0.55rem 1rem;
+
+        a {
+          font-size: 15px;
+        }
+      }
+    }
   }
 }

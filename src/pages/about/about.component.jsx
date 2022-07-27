@@ -21,22 +21,22 @@ const About = () => {
                 </div>
                 <div className="partners-list">
                     <div>
-                        <h4>Limonta</h4>
+                        <h4>NMC Romania</h4>
                     </div>
                     <div>
-                        <h4>Tekko</h4>
+                        <h4>Mida Pro Decor</h4>
                     </div>
                     <div>
-                        <h4>Portofino</h4>
+                        <h4>ACM Italy</h4>
                     </div>
                     <div>
                         <h4>Industrie Emiiana Parati</h4>
                     </div>
                     <div>
-                        <h4>Graham & Brown</h4>
+                        <h4></h4>
                     </div>
                     <div>
-                        <h4>Zambaiti</h4>
+                        <h4></h4>
                     </div>
                     <div>
                         <h4>Grandeco</h4>

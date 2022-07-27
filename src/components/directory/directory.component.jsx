@@ -101,7 +101,7 @@ const Directory = () => {
             </div>
             <div className="avantaje-text">
               <div>
-                <h3>Avantaje</h3>
+                <h3>Avantaje daca cumparati de la noi</h3>
               </div>
               <ul>
                 <li>

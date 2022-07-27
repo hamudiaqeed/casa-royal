@@ -1,8 +1,8 @@
 import React from "react";
 import './footer.styles.scss';
 import {Link} from "react-router-dom";
-import {BsInstagram} from 'react-icons/bs';
-import {FaFacebookSquare} from 'react-icons/fa';
+import {FaInstagram} from 'react-icons/fa';
+import {FaFacebook} from 'react-icons/fa';
 import logo from '../../assets/logo.jpg';
 
 const Footer = () => {
@@ -27,9 +27,7 @@ const Footer = () => {
                         <Link to='/search/mocheta'>Colectii mocheta</Link>
                         <Link to='/search/decoratiuni'>Decoratiuni interioare</Link>
                         <Link to='/search/decoratiuni'>Decoratiuni exterioare</Link>
-                        <Link>Corpuri de iluminat</Link>
                         <Link to='/search/vopsea'>Vopsele decorative</Link>
-                        <Link>Adezivi</Link>
                     </div>
                 </div>
                 <div className="footer-section">
@@ -52,10 +50,10 @@ const Footer = () => {
                     </div>
                    <div className="icons">
                         <a href="https://www.facebook.com/casaroyalofficial" target="_blank" className="facebook">
-                            <FaFacebookSquare size={30} />
+                            <FaFacebook size={30} />
                         </a>
                         <a href="https://www.instagram.com/casaroyaloficial/" target="_blank" className="instagram">
-                            <BsInstagram size={30} />
+                            <FaInstagram size={30} />
                         </a>
                    </div>
                 </div>

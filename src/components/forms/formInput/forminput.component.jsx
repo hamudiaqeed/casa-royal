@@ -9,7 +9,7 @@ const FormInput = ({ handleChange, label, ...otherProps }) => {
                 <label>{label}</label>
             )}
 
-            <input className='formInput' onChange={handleChange} {...otherProps} />
+            <input className='formInput' required onChange={handleChange} {...otherProps} />
         </div>
     );
 }

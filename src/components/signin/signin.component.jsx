@@ -3,7 +3,6 @@ import './signin.styles.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { emailSignInStart, googleSignInStart } from '../../redux/User/user.actions';
 import Button from '../forms/Button/button.component';
-import FormInput from '../forms/FormInput/forminput.component';
 import { Link, useHistory } from 'react-router-dom';
 import AuthWrapper from '../AuthWrapper/index';
 
@@ -45,32 +44,41 @@ const SignIn = () => {
     return (
         <AuthWrapper {...configAuthWrapper}>
             <div className='formWrap'>
-                <form onSubmit={handleSubmit}>
-                    <FormInput 
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={email}
-                        handleChange={(e) => setEmail(e.target.value)}
-                    />
-                    <FormInput 
-                        type="password"
-                        name="password"
-                        placeholder="Parola"
-                        value={password}
-                        handleChange={(e) => setPassword(e.target.value)}
-                    />
-                    <Button type="submit">Login</Button>
-                    <div className='socialSignin'>
-                        <div className='row'>
-                            <Button onClick={handleGoogleSignIn}>
-                                Logare cu Google
-                            </Button>
-                        </div>
+                <form onSubmit={handleSubmit} className="login-form">
+                    <h1>Login</h1>
+                    <div className='txtb'>
+                        <input 
+                            type="email"
+                            name="email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <span data-placeholder='Email'></span>
                     </div>
-                    <div className='links'>
-                        <Link to="/recovery">Reseteaza parola</Link>
-                        <p>Nu ai cont? Creeaza unul <Link to="/registration" className='underline'> aici</Link></p>
+                    <div className='txtb'>
+                        <input 
+                            type="password"
+                            name="password"
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <span data-placeholder='Parola'></span>
+                    </div>
+                    <Button type="submit">Login</Button>
+                    <div className='bottom-text'>
+                        <div className='socialSignin'>
+                            <div className='row'>
+                                <Button onClick={handleGoogleSignIn}>
+                                    Logare cu Google
+                                </Button>
+                            </div>
+                        </div>
+                        <div className='links'>
+                            <Link to="/recovery" className='bold'>Reseteaza parola</Link>
+                            <p>Nu ai cont? Creeaza unul <Link to="/registration" className='underline bold'> aici</Link></p>
+                        </div>
                     </div>
                 </form>
             </div>

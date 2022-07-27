@@ -67,6 +67,8 @@ footer {
         .icons {
             display: flex;
             gap: 20px;
+
+            
         }
 
         .facebook {
@@ -81,6 +83,12 @@ footer {
             }
         }
     }
+}
 
-    
+@media screen and (max-width: 750px) {
+    footer {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }
 }

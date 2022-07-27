@@ -21,9 +21,9 @@ const Checkout = ({ }) => {
 
   return (
     <div className="checkout">
-      <h1>
-        Checkout
-      </h1>
+      {
+        cartItems.length > 0 && <h1>Checkout</h1>
+      }
 
       <div className="cart">
         {cartItems.length > 0 ? (
@@ -33,7 +33,7 @@ const Checkout = ({ }) => {
                 <td>
                   <table className="checkoutHeader" border="0" cellPadding="10" cellSpacing="0">
                     <tbody>
-                      <tr>
+                      <tr className='table-header'>
                         <th>
                           Produs
                         </th>
@@ -94,7 +94,7 @@ const Checkout = ({ }) => {
                         <td>
                           <table border="0" cellPadding="10" cellSpacing="0">
                             <tbody>
-                              <tr>
+                              <tr className='buttons-cart'>
                                 <td>
                                   <Button onClick={() => history.goBack()}>
                                     Continua cumparaturile
@@ -117,7 +117,7 @@ const Checkout = ({ }) => {
             </tbody>
           </table>
         ) : (
-            <div>
+            <div className='no-prod'>
               <p>
                 {errMsg}
               </p>

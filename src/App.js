@@ -17,6 +17,7 @@ import Cart from './pages/Cart';
 import Payment from './pages/Payment';
 import Order from './pages/Order';
 import Search from './pages/Search';
+import NotFound from './pages/NotFound/notfound';
 import AdminToolbar from './components/AdminToolbar/admin.component';
 import { checkUserSession } from './redux/User/user.actions';
 import { useDispatch } from 'react-redux';
@@ -87,6 +88,7 @@ const App = () => {
             </DashboardLayout>
           </WithAuth>
         )} />
+        <Route component={NotFound} />
       </Switch>
       <Footer />
     </div>

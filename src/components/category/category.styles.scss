@@ -83,3 +83,13 @@
       
     }
 }
+
+@media screen and (max-width: 990px) {
+  .menu-item.large {
+    height: 240px!important;
+  }
+
+  .directory-menu {
+    flex-direction: column!important;
+  }
+}

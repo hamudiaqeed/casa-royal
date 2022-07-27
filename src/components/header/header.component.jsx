@@ -99,7 +99,7 @@ const Header = props => {
                             </li>
                             <li>
                                 <Link className="option" to="/about">
-                                    DESPRE NOI
+                                    DESPRE
                                 </Link>
                             </li>
                             <li>

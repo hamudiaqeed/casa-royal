@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import './signup.styles.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpUserStart } from '../../redux/User/user.actions';
-import FormInput from '../forms/FormInput/forminput.component';
+import { Link } from 'react-router-dom';
 import Button from '../forms/Button/button.component';
 import AuthWrapper from '../AuthWrapper';
 
@@ -61,37 +61,57 @@ const SignUp = () => {
                 {
                     error.length > 0 && error
                 }
-                <form onSubmit={handleFormSubmit}>
-                    <FormInput 
-                        type="text" 
-                        name="displayName" 
-                        value={displayName} 
-                        placeholder="Nume"
-                        handleChange={(e) => setDisplayName(e.target.value)} 
-                    />
-                    <FormInput 
-                        type="email" 
-                        name="email" 
-                        value={email} 
-                        placeholder="Email"
-                        handleChange={(e) => setEmail(e.target.value)} 
-                    />
-                    <FormInput 
-                        type="password" 
-                        name="password" 
-                        value={password} 
-                        placeholder="Parola"
-                        handleChange={(e) => setPassword(e.target.value)} 
-                    />
-                    <FormInput 
-                        type="password" 
-                        name="confirmPassword" 
-                        value={confirmPassword} 
-                        placeholder="Confirma Parola"
-                        handleChange={(e) => setConfirmPassword(e.target.value)} 
-                    />
+                <form onSubmit={handleFormSubmit} className="signup-form">
+                    <h1>Sign Up</h1>
+                    <div className='txtb'>
+                        <input 
+                            type="text" 
+                            name="displayName" 
+                            value={displayName} 
+                            required
+                            onChange={(e) => setDisplayName(e.target.value)} 
+                        />
+                        <span data-placeholder='Nume'></span>
+                    </div>
+                    
+                    <div className='txtb'>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            value={email} 
+                            required
+                            onChange={(e) => setEmail(e.target.value)} 
+                        />
+                        <span data-placeholder='Email'></span>
+                    </div>
+                    
+                    <div className='txtb'>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            value={password} 
+                            required
+                            onChange={(e) => setPassword(e.target.value)} 
+                        />
+                        <span data-placeholder='Parola'></span>
+                    </div>
+                    
+                    <div className='txtb'>
+                        <input 
+                            type="password" 
+                            name="confirmPassword" 
+                            value={confirmPassword} 
+                            required
+                            onChange={(e) => setConfirmPassword(e.target.value)} 
+                        />
+                        <span data-placeholder='Confirma Parola'></span>
+                    </div>
 
                     <Button type="submit">Confirma</Button>
+
+                    <div className='links'>
+                            <p>Ai deja cont? Apasa <Link to="/login" className='underline bold'> aici</Link></p>
+                    </div>
                 </form>
             </div>
         </AuthWrapper>

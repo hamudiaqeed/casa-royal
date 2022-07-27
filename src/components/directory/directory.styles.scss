@@ -16,6 +16,7 @@
         padding: 20px;
         gap: 10px;
         border: 1px solid lightgray;
+        align-items: center;
 
         .benef-text {
             h3 {
@@ -69,12 +70,11 @@
     .img-container{
         width: 50%;
         img {
-            width: 100%;
+            width: 70%;
         }
     }
 
     .avantaje-text {
-        width: 50%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -86,5 +86,51 @@
             gap: 25px;
             list-style: none;
         }
+
+        ul li:before {
+            content: '✓';
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: green;
+        }
+
+        ul li {
+            font-size: 2.2rem;
+        }
+
+        div {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
     }
 }
+
+@media screen and (max-width: 850px) {
+    .beneficii {
+      flex-direction: column!important;
+      
+    }
+
+    .benef-section {
+        width: 100%!important;
+    }
+
+    .parallax {
+        div {
+            width: 90%;
+        }
+    }
+
+    .avantaje {
+        flex-direction: column;
+
+        .img-container {
+            width: 80%;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+  }
