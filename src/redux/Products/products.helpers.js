@@ -1,9 +1,11 @@
 import { firestore } from './../../firebase/utils';
 
-export const handleAddProduct = product => {
+export const handleAddProduct = (product) => {
   return new Promise((resolve, reject) => {
     firestore
       .collection('products')
+      .doc(product.productCategory)
+      .collection(product.productSubcategory)
       .doc()
       .set(product)
       .then(() => {
@@ -15,13 +17,13 @@ export const handleAddProduct = product => {
   });
 }
 
-export const handleFetchProducts = ({ filterType, startAfterDoc, persistProducts=[] }) => {
+export const handleFetchProducts = ({ subcategory, collection, startAfterDoc, persistProducts=[] }) => {
   return new Promise((resolve, reject) => {
     const pageSize = 9;
 
-    let ref = firestore.collection('products').orderBy('createdDate').limit(pageSize);
+    let ref = firestore.collection('products').doc(subcategory).collection(collection).orderBy('createdDate').limit(pageSize);
 
-    if (filterType) ref = ref.where('productCategory', '==', filterType);
+    // if (filterType) ref = ref.where('productCategory', '==', filterType);
     if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 
     ref
@@ -51,14 +53,15 @@ export const handleFetchProducts = ({ filterType, startAfterDoc, persistProducts
   })
 }
 
-export const handleDeleteProduct = documentID => {
+export const handleDeleteProduct = ({ subcategory, collection, documentID }) => {
   return new Promise((resolve, reject) => {
     firestore
       .collection('products')
+      .doc(subcategory)
+      .collection(collection)
       .doc(documentID)
       .delete()
       .then(() => {
-        console.log(documentID, 2)
         resolve();
       })
       .catch(err => {
@@ -67,18 +70,20 @@ export const handleDeleteProduct = documentID => {
   });
 }
 
-export const handleFetchProduct = (productID) => {
+export const handleFetchProduct = (info) => {
   return new Promise((resolve, reject) => {
     firestore
       .collection('products')
-      .doc(productID)
+      .doc(info.subcategory)
+      .collection(info.collection)
+      .doc(info.productID)
       .get()
       .then(snapshot => {
 
         if (snapshot.exists) {
           resolve({
             ...snapshot.data(),
-            documentID: productID
+            documentID: info.productID
           });
         }
       })

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getOrderDetailsStart } from './../../redux/Orders/orders.actions';
 import { useDispatch, useSelector } from 'react-redux';
 import OrderDetails from './../../components/OrderDetails';
+import './order.styles.scss';
 
 const mapState = ({ ordersData }) => ({
   orderDetails: ordersData.orderDetails
@@ -25,7 +26,7 @@ const Order = () => {
   return (
     <div>
 
-      <h1>
+      <h1 className='order-name'>
         Order ID: #{orderID}
       </h1>
 

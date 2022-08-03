@@ -13,15 +13,38 @@ const columns = [
   },
   {
     id: 'productName',
-    label: 'Name'
+    label: 'Nume'
   },
   {
     id: 'productPrice',
-    label: 'Price'
+    label: 'Pret'
   },
   {
     id: 'quantity',
-    label: 'Quantity'
+    label: 'Cantitate'
+  }
+]
+
+const columnsInfo = [
+  {
+    id: 'adresa',
+    label: 'Adresa'
+  },
+  {
+    id: 'judet',
+    label: 'Judet'
+  },
+  {
+    id: 'localitate',
+    label: 'Localitate'
+  },
+  {
+    id: 'nume',
+    label: 'Nume'
+  },
+  {
+    id: 'telefon',
+    label: 'Telefon'
   }
 ]
 
@@ -33,7 +56,7 @@ const styles = {
 const formatText = (columnName, columnValue) => {
   switch(columnName) {
     case 'productPrice':
-      return `£${columnValue}`;
+      return `${columnValue} lei`;
     case 'productThumbnail':
       return <img src={columnValue} width={250} />;
     default:
@@ -44,6 +67,7 @@ const formatText = (columnName, columnValue) => {
 const OrderDetails = ({ order }) => {
   const dispatch = useDispatch();
   const orderItems = order && order.orderItems;
+  const orderInfo = order && order.orderInfo;
 
   useEffect(() => {
     return () => {
@@ -97,9 +121,49 @@ const OrderDetails = ({ order }) => {
               </TableRow>
             )
           })}
-
         </TableBody>
+      </Table>
 
+      <Table>
+        <TableHead>
+            <TableRow>
+            {columnsInfo.map((col, pos) => {
+              return (
+                <TableCell
+                  key={pos}
+                  style={styles}
+                >
+                  {col.label}
+                </TableCell>
+              )
+            })}
+
+          </TableRow>
+        </TableHead>
+
+        <TableBody>
+          {(Array.isArray(orderInfo) && orderInfo.length > 0) && orderInfo.map((row, pos) => {
+            return (
+              <TableRow key={pos}>
+
+                {columnsInfo.map((col, pos) => {
+                  const columnName = col.id;
+                  const columnValue = row[columnName];
+
+                  return (
+                    <TableCell
+                      key={pos}
+                      style={styles}
+                    >
+                      {formatText(columnName, columnValue)}
+                    </TableCell>
+                  )
+                })}
+
+              </TableRow>
+            )
+          })}
+        </TableBody>
       </Table>
     </TableContainer>
   )

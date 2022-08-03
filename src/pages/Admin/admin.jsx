@@ -8,26 +8,40 @@ import Button from './../../components/forms/Button/button.component';
 import LoadMore from './../../components/LoadMore';
 import {CKEditor} from 'ckeditor4-react';
 import './admin.styles.scss';
+import OrderHistory from '../../components/OrderHistory';
+import { getUserOrderHistory } from './../../redux/Orders/orders.actions';
 
-const mapState = ({ productsData }) => ({
-  products: productsData.products
+const mapState = ({ productsData, user, ordersData }) => ({
+  products: productsData.products,
+  currentUser: user.currentUser,
+  orderHistory: ordersData.orderHistory.data
 });
 
 const Admin = props => {
-  const { products } = useSelector(mapState);
+  const { products, currentUser, orderHistory } = useSelector(mapState);
   const dispatch = useDispatch();
   const [hideModal, setHideModal] = useState(true);
   const [productCategory, setProductCategory] = useState('tapet');
+  const [productSubcategory, setProductSubcategory] = useState('interior');
   const [productName, setProductName] = useState('');
+  const [productCode, setProductCode] = useState('');
   const [productThumbnail, setProductThumbnail] = useState('');
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState('');
+  const [productCategoryFilter, setProductCategoryFilter] = useState('tapet');
+  const [productSubcategoryFilter, setproductSubcategoryFilter] = useState('interior');
 
   const { data, queryDoc, isLastPage } = products;
 
   useEffect(() => {
     dispatch(
-      fetchProductsStart()
+      fetchProductsStart(productCategoryFilter, productSubcategoryFilter)
+    );
+  }, [productCategoryFilter, productSubcategoryFilter]);
+
+  useEffect(() => {
+    dispatch(
+      getUserOrderHistory(currentUser.id, currentUser.userRoles[1])
     );
   }, []);
 
@@ -41,7 +55,9 @@ const Admin = props => {
   const resetForm = () => {
     setHideModal(true);
     setProductCategory('tapet');
+    setProductSubcategory('interior');
     setProductName('');
+    setProductCode('');
     setProductThumbnail('');
     setProductPrice(0);
     setProductDesc('');
@@ -53,7 +69,9 @@ const Admin = props => {
     dispatch(
       addProductStart({
         productCategory,
+        productSubcategory,
         productName,
+        productCode,
         productThumbnail,
         productPrice,
         productDesc,
@@ -64,12 +82,18 @@ const Admin = props => {
   };
 
   const handleLoadMore = () => {
+    let startAfterDoc = queryDoc;
+    let persistProducts = data;
+    let subcategory = productCategoryFilter;
+    let collection = productSubcategoryFilter;
     dispatch(
-      fetchProductsStart({
-        startAfterDoc: queryDoc,
-        persistProducts: data
-      })
-    );
+      fetchProductsStart(
+        subcategory,
+        collection,
+        startAfterDoc,
+        persistProducts
+      )
+    )
   };
 
   const configLoadMore = {
@@ -78,6 +102,9 @@ const Admin = props => {
 
   return (
     <div className="admin">
+      <div>
+        <OrderHistory orders={orderHistory} />
+      </div>
       <div className="callToActions">
         <ul>
           <li>
@@ -87,17 +114,8 @@ const Admin = props => {
           </li>
         </ul>
       </div>
-
-      <Modal {...configModal}>
-        <div className="addNewProductForm">
-          <form onSubmit={handleSubmit}>
-
-            <h2>
-              Adauga produs
-            </h2>
-
-            <FormSelect
-              label="Category"
+      <FormSelect
+              label="Categorie"
               options={[{
                 value: "tapet",
                 name: "Tapet"
@@ -113,8 +131,100 @@ const Admin = props => {
               }, {
                 value: "decoratiuni",
                 name: "Decoratiuni"
+              }, {
+                value: "adezivi",
+                name: "Adezivi"
+              }]}
+              onChange={e => setProductCategoryFilter(e.target.value)}
+            />
+            <FormSelect
+              label="Subcategorie"
+              options={[{
+                value: "interior",
+                name: "Interior"
+              }, {
+                value: "exterior",
+                name: "Exterior"
+              }, {
+                value: "mocheta",
+                name: "Mocheta"
+              }, {
+                value: "plinte",
+                name: "Plinte"
+              }, {
+                value: "decoratiuni",
+                name: "Decoratiuni"
+              }, {
+                value: "adezivi",
+                name: "Adezivi"
+              }, {
+                value: "Roberto Cavali No. 8",
+                name: "Roberto Cavali No. 8"
+              }, {
+                value: "Roberto Cavali No. 7",
+                name: "Roberto Cavali No. 7"
+              }]}
+              onChange={e => setproductSubcategoryFilter(e.target.value)}
+            />
+
+      <Modal {...configModal}>
+        <div className="addNewProductForm">
+          
+          <form onSubmit={handleSubmit}>
+
+            <h2>
+              Adauga produs
+            </h2>
+
+            <FormSelect
+              label="Categorie"
+              options={[{
+                value: "tapet",
+                name: "Tapet"
+              }, {
+                value: "profile",
+                name: "Profile Decorative"
+              }, {
+                value: "mocheta",
+                name: "Mocheta"
+              }, {
+                value: "vopsea",
+                name: "Vopsea Decorativa"
+              }, {
+                value: "decoratiuni",
+                name: "Decoratiuni"
+              }, {
+                value: "adezivi",
+                name: "Adezivi"
               }]}
               handleChange={e => setProductCategory(e.target.value)}
+            />
+
+            <FormSelect
+              label="Subcategorie"
+              options={[{
+                value: "interior",
+                name: "Interior"
+              }, {
+                value: "exterior",
+                name: "Exterior"
+              }, {
+                value: "cornise",
+                name: "Cornise"
+              }, {
+                value: "plinte",
+                name: "Plinte"
+              }, {
+                value: "brauri",
+                name: "Brauri"
+              }, {
+                value: "Roberto Cavali No. 8",
+                name: "Roberto Cavali No. 8"
+              }, {
+                value: "Roberto Cavali No. 7",
+                name: "Roberto Cavali No. 7"
+              }]}
+              handleChange={e => setProductSubcategory(e.target.value)}
             />
 
             <FormInput
@@ -122,6 +232,13 @@ const Admin = props => {
               type="text"
               value={productName}
               handleChange={e => setProductName(e.target.value)}
+            />
+
+            <FormInput
+              label="Cod Produs"
+              type="text"
+              value={productCode}
+              handleChange={e => setProductCode(e.target.value)}
             />
 
             <FormInput
@@ -154,7 +271,6 @@ const Admin = props => {
           </form>
         </div>
       </Modal>
-
       <div className="manageProducts">
 
         <table border="0" cellPadding="0" cellSpacing="0">
@@ -190,7 +306,7 @@ const Admin = props => {
                             {productPrice} RON
                           </td>
                           <td>
-                            <Button onClick={() => dispatch(deleteProductStart(documentID))}>
+                            <Button onClick={() => dispatch(deleteProductStart(productCategoryFilter, productSubcategoryFilter, documentID))}>
                               Sterge
                             </Button>
                           </td>

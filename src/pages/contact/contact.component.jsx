@@ -1,83 +1,171 @@
-import React from "react";
+import React, {useState, useRef} from "react";
 import './contact.styles.scss';
-import adresa1 from '../../assets/adresa1.PNG';
-import adresa24 from '../../assets/adresa24.PNG';
-import adresa3 from '../../assets/adresa3.PNG';
-import adresa5 from '../../assets/adresa5.PNG';
+import ReCAPTCHA from "react-google-recaptcha";
+import Button from "../../components/forms/Button/button.component";
+import {Link} from 'react-router-dom';
+import emailjs from "@emailjs/browser";
+import { useEffect } from "react";
 
 const Contact = () => {
+
+    const [recaptcha, setRecaptcha] = useState();
+    const captchaRef = useRef(null);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [telefon, setTelefon] = useState('');
+    const [subiect, setSubiect] = useState('');
+    const [mesaj, setMesaj] = useState('');
+    const [checked, setChecked] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let mess = {
+            titlu: 'Contact',
+            nume: name,
+            email,
+            telefon,
+            subiect,
+            mesaj
+        }
+        const token = captchaRef?.current?.getValue();
+        // if(token && checked) {
+        //     emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_USER_ID')
+        //     .then((result) => {
+        //         console.log(result.text);
+        //     }, (error) => {
+        //         console.log(error.text);
+        //     });
+        // }
+        captchaRef.current.reset();
+    }
+
     return (
         <div className="contact">
-            <p className="contact-p">Lansat in 2007, conceptul Casa Royal s-a extins in permanenta datorita cererii clientilor din capitala si din alte orase. In acest moment, exista patru magazine in Bucuresti, Constanta si Craiova, iar planurile de extindere continua pentru ca ne dorim sa fim cat mai aproape de fiecare dintre clientii nostri.</p>
             <div className="locations">
                 <div className="location">
                     <div>
-                        <h2>BUCURESTI - SHOWROOM NICOLAE TITULESCU</h2>
-                        <p>Adresa: Sos. Nicolae Titulescu nr.121</p>
-                        <p>Persoana contact: Slabu Catalin</p>
-                        <p>Telefon: 0736 948 334</p>
-                        <p>Email: catalin.slabu@casaroyal.ro</p>
+                        <h3>BUCURESTI - SHOWROOM NICOLAE TITULESCU</h3>
+                        <p><span className="bold">Adresa:</span> Sos. Nicolae Titulescu nr.121</p>
+                        <p><span className="bold">Persoana contact:</span> Cezar Maracine</p>
+                        <p><span className="bold">Telefon:</span> 0734 802 222</p>
+                        <p><span className="bold">Persoana contact:</span> Slabu Catalin</p>
+                        <p><span className="bold">Telefon:</span> 0736 948 334</p>
+                        <p><span className="bold">Email:</span> catalin.slabu@casaroyal.ro</p>
+                        <a href="https://goo.gl/maps/1uEw31M3Sgq9RxiP8">Vezi locatia pe harta</a>
                     </div>
-                    <img src={adresa1} alt="casa royal locatie" />
+                    <div className="location-img loc-1"></div>
                 </div>
                 <div className="location">
                     <div>
-                        <h2>BUCURESTI - SHOWROOM EXPO TOP CONSTRUCT</h2>
-                        <p>Adresa: Valea Cascadelor nr. 23, sector 6 , stand A7O7</p>
-                        <p>Persoana contact: Mihai Neacsu</p>
-                        <p>Telefon: 0730 103 333</p>
-                        <p>Email: mihai.neacsu@casaroyal.ro</p>
+                        <h3>BUCURESTI - SHOWROOM EXPO TOP CONSTRUCT</h3>
+                        <p><span className="bold">Adresa:</span> Valea Cascadelor nr. 23, sector 6 , stand A7O7</p>
+                        <p><span className="bold">Persoana contact:</span> Cezar Maracine</p>
+                        <p><span className="bold">Telefon:</span> 0734 802 222</p>
+                        <p><span className="bold">Persoana contact:</span> Mihai Neacsu</p>
+                        <p><span className="bold">Telefon:</span> 0730 103 333</p>
+                        <p><span className="bold">Email:</span> mihai.neacsu@casaroyal.ro</p>
+                        <a href="https://goo.gl/maps/PNSUR9zkYqEw2MnH9">Vezi locatia pe harta</a>
                     </div>
-                    <img src={adresa24} alt="casa royal locatie" />
+                    <div className="location-img loc-24"></div>
                 </div>
                 <div className="location">
                     <div>
-                        <h2>BUCURESTI - SHOWROOM HOME&DESIGN MALL</h2>
-                        <p>Adresa: Bulevardul Ghencea nr.126-132, sector 6</p>
-                        <p>Persoana contact: George Stanciu</p>
-                        <p>Telefon: 0735 092 222</p>
-                        <p>Email: george.stanciu@casaroyal.ro</p>
+                        <h3>BUCURESTI - SHOWROOM HOME&DESIGN MALL</h3>
+                        <p><span className="bold">Adresa:</span> Bulevardul Ghencea nr.126-132, sector 6</p>
+                        <p><span className="bold">Persoana contact:</span> George Stanciu</p>
+                        <p><span className="bold">Telefon:</span> 0735 092 222</p>
+                        <p><span className="bold">Email:</span> george.stanciu@casaroyal.ro</p>
+                        <a href="https://goo.gl/maps/aBRQvF6npSYFCReJ8">Vezi locatia pe harta</a>
                     </div>
-                    <img src={adresa3} alt="casa royal locatie" />
+                    <div className="location-img loc-3"></div>
                 </div>
                 <div className="location">
                     <div>
-                        <h2>BUCURESTI - SHOWROOM EXPO TOP CONSTRUCT</h2>
-                        <p>Adresa: Valea Cascadelor nr. 23, sector 6 , stand B14C14</p>
-                        <p>Persoana contact: Claudiu Turcu</p>
-                        <p>Telefon: 0735 898 888</p>
-                        <p>Email: claudiu.turcu@casaroyal.ro</p>
+                        <h3>BUCURESTI - SHOWROOM EXPO TOP CONSTRUCT</h3>
+                        <p><span className="bold">Adresa:</span> Valea Cascadelor nr. 23, sector 6 , stand B14C14</p>
+                        <p><span className="bold">Persoana contact:</span> Cezar Maracine</p>
+                        <p><span className="bold">Telefon:</span> 0734 802 222</p>
+                        <p><span className="bold">Persoana contact:</span> Claudiu Turcu</p>
+                        <p><span className="bold">Telefon:</span> 0735 898 888</p>
+                        <p><span className="bold">Email:</span> claudiu.turcu@casaroyal.ro</p>
+                        <a href="https://goo.gl/maps/PNSUR9zkYqEw2MnH9">Vezi locatia pe harta</a>
                     </div>
-                    <img src={adresa24} alt="casa royal locatie" />
-                </div>
-                <div className="location">
-                    <div>
-                        <h2>CONSTANTA - SHOWROOM AUREL VLAICU</h2>
-                        <p>Adresa: Str. Aurel Vlaicu nr 163A in incinta complex MYC/Hiastria</p>
-                        <p>Persoana contact: Alberto Palombi</p>
-                        <p>Telefon: 0725 888 896</p>
-                        <p>Email: alberto.palombi@casaroyal.ro</p>
-                    </div>
-                    <img src={adresa5} alt="casa royal locatie" />
+                    <div className="location-img loc-24"></div>
                 </div>
             </div>
             <div className="form-container">
-                <form action="">
-                    <label htmlFor="name">Nume</label>
-                    <input type="text" name="name" id="name" required />
-                    <label htmlFor="email">E-mail</label>
-                    <input type="text" name="email" id="email" required />
-                    <label htmlFor="telefon">Telefon</label>
-                    <input type="text" name="telefon" id="telefon" required />
-                    <label htmlFor="subiect">Subiect</label>
-                    <input type="text" name="subiect" id="subiect" required />
-                    <label htmlFor="mesaj">Mesaj</label>
-                    <textarea type="text" name="mesaj" id="mesaj" rows="10" required />
-                    <div className="check">
-                        <input type="checkbox" name="tc" id="tc" required />
-                        <label htmlFor="tc">Sunt de acord si accept Politica de Confidentialitate</label>
+                <form onSubmit={handleSubmit} className="contact-form">
+                    <h2>Formular de contact</h2>                    
+                    <div className='txtb'>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            id="name" 
+                            value={name} 
+                            required 
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <span data-placeholder='Nume'></span>
                     </div>
-                    <button type="submit">Trimite</button>
+                    <div className='txtb'>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            id="email" 
+                            value={email} 
+                            required 
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <span data-placeholder='Email'></span>
+                    </div>
+                    <div className='txtb'>
+                        <input 
+                            type="text" 
+                            name="telefon" 
+                            id="telefon" 
+                            value={telefon} 
+                            required 
+                            onChange={(e) => setTelefon(e.target.value)}
+                        />
+                        <span data-placeholder='Telefon'></span>
+                    </div>
+                    <div className='txtb'>
+                        <input 
+                            type="text" 
+                            name="subiect" 
+                            id="subiect" 
+                            value={subiect} 
+                            required 
+                            onChange={(e) => setSubiect(e.target.value)}
+                        />
+                        <span data-placeholder='Subiect'></span>
+                    </div>
+                    <textarea 
+                        type="text" 
+                        name="mesaj" 
+                        id="mesaj" 
+                        rows="7" 
+                        value={mesaj} 
+                        placeholder="Mesaj" 
+                        required 
+                        onChange={(e) => setMesaj(e.target.value)}
+                    />
+                    <div className="check">
+                        <input 
+                            type="checkbox" 
+                            name="tc" 
+                            id="tc" 
+                            required 
+                            onChange={(e) => setChecked(e.target.checked)}
+                        />
+                        <label htmlFor="tc">Sunt de acord si accept <Link to='/confidentialitate' className="underline">Politica de Confidentialitate</Link></label>
+                    </div>
+                    <ReCAPTCHA
+                        sitekey="6LdKDzwhAAAAAIJj-YozmvqpOmaFJ66HfsLu4_Ar"
+                        ref={captchaRef}
+                        style={{transform: "scale(0.77)", transformOrigin: "0 0"}}
+                    />
+                    <Button type="submit">Trimite</Button>
                 </form>
             </div>
         </div>

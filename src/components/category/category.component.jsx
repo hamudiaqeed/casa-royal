@@ -2,13 +2,13 @@ import React from "react";
 import './category.styles.scss';
 import { useHistory } from "react-router-dom";
 
-const Category = ({ title, imageUrl, size, linkUrl }) => {
+const Category = ({ title, imageUrl, bg, linkUrl }) => {
 
     const history = useHistory();
 
     return (
         <div 
-            className={`${size} menu-item`} 
+            className={`${bg} menu-item`} 
             onClick={() => history.push(linkUrl)}
         >
             <div 
@@ -17,7 +17,6 @@ const Category = ({ title, imageUrl, size, linkUrl }) => {
             />
             <div className="content">
                 <h1 className="title">{title.toUpperCase()}</h1>
-                <span className="subtitle">DETALII</span>
             </div>
         </div>
     )

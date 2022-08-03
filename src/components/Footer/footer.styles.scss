@@ -7,6 +7,7 @@ footer {
     background-color: white;
     box-shadow: 0px 2px 4px rgba(0,0,0,.1), 0px -2px 4px rgba(0,0,0,.1);
     line-height: 1.5;
+    background-color: #a59962;
 
     a, h2 {
         color: #333;
@@ -38,6 +39,7 @@ footer {
     justify-content: space-evenly;
     background-color: white;
     height: 200px;
+    background-color: #a59962;
 
     .logo-social {
         display: flex;
@@ -83,6 +85,11 @@ footer {
             }
         }
     }
+}
+
+.footer-comp {
+    margin-top: auto;
+    width: 100%;
 }
 
 @media screen and (max-width: 750px) {

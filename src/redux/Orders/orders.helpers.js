@@ -15,10 +15,18 @@ export const handleSaveOrder = order => {
   });
 };
 
-export const handleGetUserOrderHistory = uid => {
+export const handleGetUserOrderHistory = ({uid, role}) => {
   return new Promise((resolve, reject) => {
-    let ref = firestore.collection('orders').orderBy('orderCreatedDate');
-    ref = ref.where('orderUserID', '==', uid);
+    let ref;
+    if(role === 'admin') {
+      ref = firestore.collectionGroup('orders');
+      
+    } else {
+      ref = firestore.collection('orders').orderBy('orderCreatedDate');
+      ref = ref.where('orderUserID', '==', uid);
+    }
+
+    
 
     ref
       .get()

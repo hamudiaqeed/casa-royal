@@ -1,31 +1,34 @@
 import React, { useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductStart, setProduct } from './../../redux/Products/products.actions';
 import { addProduct } from './../../redux/Cart/cart.actions';
 import Button from './../forms/Button/button.component';
 import './styles.scss';
 
-const mapState = state => ({
-  product: state.productsData.product
+const mapState = ({productsData}) => ({
+  product: productsData.product
 });
 
 const ProductCard = ({}) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { productID } = useParams();
   const { product } = useSelector(mapState);
+
+  let subcategory = history?.location?.pathname?.split('/')[2];
+  let collection = history?.location?.pathname?.split('/')[3];
+  let productID = history?.location?.pathname?.split('/')[4];
 
   const {
     productThumbnail,
     productName,
     productPrice,
-    productDesc,
+    productDesc
   } = product;
 
   useEffect(() => {
     dispatch(
-      fetchProductStart(productID)
+      fetchProductStart(subcategory, collection, productID)
     )
 
     return () => {

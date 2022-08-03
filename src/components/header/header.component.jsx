@@ -2,8 +2,8 @@ import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { signOutUserStart } from '../../redux/User/user.actions';
 import { selectCartItemsCount } from './../../redux/Cart/cart.selectors';
-import {Link, useLocation} from "react-router-dom";
-import logo from '../../assets/logo.jpg';
+import {Link} from "react-router-dom";
+import logo from '../../assets/logo.png';
 import './header.styles.scss';
 import ReactWhatsapp from "react-whatsapp";
 import whatsapp from '../../assets/whatsapp.svg';
@@ -37,7 +37,9 @@ const Header = props => {
     };
 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [anchor2, setAnchor2] = useState(null);
     const open = Boolean(anchorEl);
+    const open2 = Boolean(anchor2);
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -45,6 +47,14 @@ const Header = props => {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
+    const handleClose2 = () => {
+        setAnchor2(null);
+    }
+
+    const handleClick2 = (e) => {
+        setAnchor2(e.currentTarget);
+    }
 
     useEffect(() => {
         const handleResize = () => {
@@ -93,9 +103,66 @@ const Header = props => {
                                 </Link>
                             </li>
                             <li>
-                                <Link className="option" to="/search">
+                                {/* <Link className="option" to="/search">
                                     PRODUSE
-                                </Link>
+                                </Link> */}
+                                        <Button
+                                            id="basic-button"
+                                            to='/search'
+                                            aria-controls={open2 ? 'basic-menu' : undefined}
+                                            aria-haspopup="true"
+                                            aria-expanded={open2 ? 'true' : undefined}
+                                            onClick={handleClick2}
+                                            className="menu2"
+                                        >
+                                            PRODUSE
+                                        </Button>
+                                        <Menu
+                                            id="basic-menu"
+                                            anchorEl={anchor2}
+                                            open={open2}
+                                            onClose={handleClose2}
+                                            MenuListProps={{
+                                            'aria-labelledby': 'basic-button',
+                                            }}
+                                            // transformOrigin={{ horizontal: 'left', vertical: 'top' }}
+                                            transformOrigin={{
+                                                vertical: -50,
+                                                horizontal: 50,
+                                              }}
+                                            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                        >
+                                            <MenuItem onClick={handleClose}>
+                                                <Link to="/search/tapet">
+                                                    Tapet
+                                                </Link>
+                                            </MenuItem>
+                                            <MenuItem onClick={handleClose}>
+                                                <Link to="/search/profile">
+                                                    Profile Decorative
+                                                </Link>
+                                            </MenuItem>
+                                            <MenuItem onClick={handleClose}>
+                                                <Link to="/search/mocheta">
+                                                    Mocheta
+                                                </Link>
+                                            </MenuItem>
+                                            <MenuItem onClick={handleClose}>
+                                                <Link to="/search/vopsea">
+                                                    Vopsea Decorativa
+                                                </Link>
+                                            </MenuItem>
+                                            <MenuItem onClick={handleClose}>
+                                                <Link to="/search/decoratiuni">
+                                                    Decoratiuni
+                                                </Link>
+                                            </MenuItem>
+                                            <MenuItem onClick={handleClose}>
+                                                <Link to="/search/adezivi">
+                                                    Adezivi
+                                                </Link>
+                                            </MenuItem>
+                                        </Menu>
                             </li>
                             <li>
                                 <Link className="option" to="/about">
@@ -114,7 +181,7 @@ const Header = props => {
                                 <li>
                                     <Link to="/cart" className="cart-header">
                                         <AiOutlineShoppingCart size={30} />
-                                        <span>{totalNumCartItems}</span>
+                                        <span>{totalNumCartItems > 0 && totalNumCartItems}</span>
                                     </Link>
                                 </li>
                                 {currentUser && (

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FormInput from './../forms/FormInput/forminput.component';
 import Button from './../forms/Button/button.component';
-import { apiInstance } from './../../utils';
 import { selectCartTotal, selectCartItemsCount, selectCartItems } from './../../redux/Cart/cart.selectors';
 import { saveOrderHistory } from './../../redux/Orders/orders.actions';
 import { createStructuredSelector } from 'reselect';
@@ -29,7 +28,6 @@ const PaymentDetails = () => {
   const { total, itemCount, cartItems } = useSelector(mapState);
   const dispatch = useDispatch();
   const [shippingAddress, setShippingAddress] = useState({ ...initialAddressState });
-  const [recipientName, setRecipientName] = useState('');
 
   useEffect(() => {
     if (itemCount < 1) {
@@ -39,85 +37,58 @@ const PaymentDetails = () => {
   }, [itemCount]);
 
   const handleShipping = evt => {
-    const { name, value } = evt.target;
+    const { name, value } = evt;
     setShippingAddress({
       ...shippingAddress,
       [name]: value
     });
   };
 
-  // const handleFormSubmit = async evt => {
-  //   evt.preventDefault();
-  //   const cardElement = elements.getElement('card');
+  const handleFormSubmit = async evt => {
+    evt.preventDefault();
 
-  //   if (
-  //     !shippingAddress.line1 || !shippingAddress.city ||
-  //     !shippingAddress.state || !shippingAddress.postal_code ||
-  //     !shippingAddress.country || !billingAddress.line1 ||
-  //     !billingAddress.city || !billingAddress.state ||
-  //     !billingAddress.postal_code || !billingAddress.country ||
-  //     !recipientName || !nameOnCard
-  //   ) {
-  //     return;
-  //   }
+    if (
+      !shippingAddress.nume || !shippingAddress.localitate ||
+      !shippingAddress.judet || !shippingAddress.adresa ||
+      !shippingAddress.telefon
+    ) {
+      return;
+    }
 
-  //   apiInstance.post('/payments/create', {
-  //     amount: total * 100,
-  //     shipping: {
-  //       name: recipientName,
-  //       address: {
-  //         ...shippingAddress
-  //       }
-  //     }
-  //   }).then(({ data: clientSecret }) => {
+    const configOrder = {
+      orderTotal: total,
+      orderItems: cartItems.map(item => {
+        const { documentID, productThumbnail, productName,
+        productPrice, quantity } = item;
 
-  //     stripe.createPaymentMethod({
-  //       type: 'card',
-  //       card: cardElement,
-  //       billing_details: {
-  //         name: nameOnCard,
-  //         address: {
-  //           ...billingAddress
-  //         }
-  //       }
-  //     }).then(({ paymentMethod }) => {
+        return {
+          documentID,
+          productThumbnail,
+          productName,
+          productPrice,
+          quantity
+        };
+      }),
+      orderInfo: [
+        {
+          nume: shippingAddress.nume,
+          telefon: shippingAddress.telefon,
+          adresa: shippingAddress.adresa,
+          localitate: shippingAddress.localitate,
+          judet: shippingAddress.judet
+        }
+      ]
+    }
 
-  //       stripe.confirmCardPayment(clientSecret, {
-  //         payment_method: paymentMethod.id
-  //       })
-  //       .then(({ paymentIntent }) => {
+    dispatch(
+      saveOrderHistory(configOrder)
+    );
 
-  //         const configOrder = {
-  //           orderTotal: total,
-  //           orderItems: cartItems.map(item => {
-  //             const { documentID, productThumbnail, productName,
-  //               productPrice, quantity } = item;
-
-  //             return {
-  //               documentID,
-  //               productThumbnail,
-  //               productName,
-  //               productPrice,
-  //               quantity
-  //             };
-  //           })
-  //         }
-
-  //         dispatch(
-  //           saveOrderHistory(configOrder)
-  //         );
-  //       });
-
-  //     })
-
-
-  //   });
-
-  // };
+  };
 
   return (
     <div className="paymentDetails">
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <div className="group">
           <h2>
             Detalii comanda
@@ -126,8 +97,8 @@ const PaymentDetails = () => {
             required
             placeholder="Nume"
             name="nume"
-            handleChange={evt => setRecipientName(evt.target.value)}
-            value={recipientName}
+            handleChange={evt => handleShipping(evt.target)}
+            value={shippingAddress.nume}
             type="text"
           />
 
@@ -135,7 +106,7 @@ const PaymentDetails = () => {
             required
             placeholder="Adresa"
             name="adresa"
-            handleChange={evt => handleShipping(evt)}
+            handleChange={evt => handleShipping(evt.target)}
             value={shippingAddress.adresa}
             type="text"
           />
@@ -144,7 +115,7 @@ const PaymentDetails = () => {
             required
             placeholder="Localitate"
             name="localitate"
-            handleChange={evt => handleShipping(evt)}
+            handleChange={evt => handleShipping(evt.target)}
             value={shippingAddress.localitate}
             type="text"
           />
@@ -153,7 +124,7 @@ const PaymentDetails = () => {
             required
             placeholder="Judet"
             name="judet"
-            handleChange={evt => handleShipping(evt)}
+            handleChange={evt => handleShipping(evt.target)}
             value={shippingAddress.judet}
             type="text"
           />
@@ -162,7 +133,7 @@ const PaymentDetails = () => {
             required
             placeholder="Telefon"
             name="telefon"
-            handleChange={evt => handleShipping(evt)}
+            handleChange={evt => handleShipping(evt.target)}
             value={shippingAddress.telefon}
             type="text"
           />

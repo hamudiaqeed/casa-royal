@@ -18,6 +18,7 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [checked, setChecked] = useState(false);
     const [error, setError] = useState('');
 
     const history = useHistory();
@@ -105,6 +106,16 @@ const SignUp = () => {
                             onChange={(e) => setConfirmPassword(e.target.value)} 
                         />
                         <span data-placeholder='Confirma Parola'></span>
+                    </div>
+                    <div className="check">
+                        <input 
+                            type="checkbox" 
+                            name="tc" 
+                            id="tc" 
+                            required 
+                            onChange={(e) => setChecked(e.target.checked)}
+                        />
+                        <label htmlFor="tc">Am citit si sunt de acord cu <Link to='/confidentialitate' className='underline'>termenii si conditiile.</Link></label>
                     </div>
 
                     <Button type="submit">Confirma</Button>

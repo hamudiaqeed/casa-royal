@@ -5,39 +5,49 @@ import {MdReplay} from 'react-icons/md';
 import {FaTruck} from 'react-icons/fa';
 import {FaPhone} from 'react-icons/fa';
 import illustration from '../../assets/5209958.jpg';
+import profile from '../../assets/profile.jfif';
+import vopsea from '../../assets/vopsea.jpg';
+import tapet from '../../assets/tapet.jpg';
+import adeziv from '../../assets/adezivi.png';
+import mocheta from '../../assets/mocheta.webp';
 
 const Directory = () => {
     const [category, setCategory] = useState([
         {
           title: 'Tapet',
-          imageUrl: 'https://i.dedeman.ro/media/catalog/product/cache/dedeman/image/9df78eab33525d08d6e5fb8d27136e95/8/0/8039411.jpg',
+          imageUrl: tapet,
           id: 1,
           linkUrl: 'search/tapet'
         },
         {
           title: 'Profile Decorative',
-          imageUrl: 'https://i.dedeman.ro/media/catalog/product/cache/dedeman/image/485x485/9df78eab33525d08d6e5fb8d27136e95/6/0/6019390_1.jpg?1656892800104',
+          imageUrl: profile,
           id: 2,
           linkUrl: 'search/profile'
         },
         {
           title: 'Mocheta',
-          imageUrl: 'https://cdn-mathaus.ro/medias/sys_master/images/hef/h2a/h00/8835755016222.png',
+          imageUrl: mocheta,
           id: 3,
           linkUrl: 'search/mocheta'
         },
         {
           title: 'Vopsea Decorativa',
-          imageUrl: 'https://i.dedeman.ro/media/catalog/product/cache/dedeman/image/9df78eab33525d08d6e5fb8d27136e95/5/0/5018428_v8731-7_cordoba_-dark-purple_3.jpg',
-          size: 'large',
+          imageUrl: vopsea,
           id: 4,
           linkUrl: 'search/vopsea'
         },
         {
           title: 'Decoratiuni',
           imageUrl: 'https://dclteam.ro/wp-content/uploads/2021/06/decoratiuni-interioare-800x800px-7.jpg',
-          size: 'large',
           id: 5,
+          linkUrl: 'search/decoratiuni'
+        },
+        {
+          title: 'Adezivi',
+          imageUrl: adeziv,
+          id: 6,
+          bg: 'bg',
           linkUrl: 'search/decoratiuni'
         }
     ]);
@@ -51,7 +61,7 @@ const Directory = () => {
                         key={section.id} 
                         title={section.title} 
                         imageUrl={section.imageUrl} 
-                        size={section.size} 
+                        bg={section.bg} 
                         linkUrl={section.linkUrl}
                       />
                   ))

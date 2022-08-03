@@ -9,15 +9,15 @@ import { useHistory } from 'react-router-dom';
 const columns = [
   {
     id: 'orderCreatedDate',
-    lable: 'Order Date'
+    lable: 'Data comanda'
   },
   {
     id: 'documentID',
-    lable: 'Order ID'
+    lable: 'ID Comanda'
   },
   {
     id: 'orderTotal',
-    lable: 'Amount'
+    lable: 'Suma'
   }
 ];
 
@@ -30,7 +30,7 @@ const styles = {
 const formatText = (columnName, columnValue) => {
   switch (columnName) {
     case 'orderTotal':
-      return `£${columnValue}`;
+      return `${columnValue} lei`;
     case 'orderCreatedDate':
       return moment(columnValue.nano).format('DD/MM/YYYY')
     default:

@@ -1,0 +1,23 @@
+.dashboardLayout {
+
+
+    .controlPanel {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    min-height: 500px;
+    }
+    
+    .sidebar {
+        border-right: 1px solid black;
+        background-color: white;
+        grid-area: 1 / 1 / 6 / 2;
+    }
+
+    .content {
+        padding: 30px;
+        grid-area: 1 / 2 / 6 / 6;
+    }
+}

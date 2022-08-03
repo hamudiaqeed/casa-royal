@@ -19,15 +19,24 @@
         justify-items: center;
         gap: 30px;
         width: 50%;
+        position: relative;
         margin: 0 auto;
+
+        img {
+            width: 100%;
+            z-index: 1;
+        }
     
         div {
             width: 300px;
             height: 300px;
-            border: 1px solid black;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
         }
     }
 }

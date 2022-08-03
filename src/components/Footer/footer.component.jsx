@@ -3,21 +3,19 @@ import './footer.styles.scss';
 import {Link} from "react-router-dom";
 import {FaInstagram} from 'react-icons/fa';
 import {FaFacebook} from 'react-icons/fa';
-import logo from '../../assets/logo.jpg';
+import logo from '../../assets/logo.png';
 
 const Footer = () => {
     return (
-        <>
+        <div className="footer-comp">
             <footer className="footer">
                 <div className="footer-section">
                     <div>
                         <h2>Informatii</h2>
                         <Link to='/about'>Despre noi</Link>
-                        <Link to='/tc'>Termeni si conditii</Link>
-                        <Link>Politica de retur</Link>
-                        <Link>Informatii livrare</Link>
-                        <Link>Metode de plata</Link>
-                        <Link>Protectia consumatorului</Link>
+                        <Link to='/terms'>Termeni si conditii</Link>
+                        <Link to='/livrare'>Informatii livrare</Link>
+                        <Link to='/metode'>Metode de plata</Link>
                     </div>
                 </div>
                 <div className="footer-section">
@@ -28,14 +26,15 @@ const Footer = () => {
                         <Link to='/search/decoratiuni'>Decoratiuni interioare</Link>
                         <Link to='/search/decoratiuni'>Decoratiuni exterioare</Link>
                         <Link to='/search/vopsea'>Vopsele decorative</Link>
+                        <Link to="/search/adezivi">Adezivi</Link>
                     </div>
                 </div>
                 <div className="footer-section">
                     <div>
                         <h2>Servicii Clienti</h2>
                         <Link to='/contact'>Contact</Link>
-                        <Link>Politica Cookies</Link>
-                        <Link>Politica de Confidentialitate</Link>
+                        <Link to='/cookies'>Politica Cookies</Link>
+                        <Link to='/confidentialitate'>Politica de Confidentialitate</Link>
                     </div>
                 </div>
                 
@@ -59,7 +58,7 @@ const Footer = () => {
                 </div>
                 <p>&copy; Casa Royal 2022. Toate drepturile rezervate.</p>
             </div>
-        </>
+        </div>
     )
 }
 

@@ -5,9 +5,9 @@ export const saveOrderHistory = order => ({
   payload: order
 });
 
-export const getUserOrderHistory = uid => ({
+export const getUserOrderHistory = (uid, role) => ({
   type: ordersTypes.GET_USER_ORDER_HISTORY_START,
-  payload: uid
+  payload: {uid, role}
 });
 
 export const setUserOrderHistory = history => ({

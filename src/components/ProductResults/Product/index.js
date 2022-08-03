@@ -11,7 +11,9 @@ const Product = (product) => {
     documentID,
     productThumbnail,
     productName,
-    productPrice
+    productPrice,
+    productCategory,
+    productSubcategory
   } = product;
   if (!documentID || !productThumbnail || !productName ||
     typeof productPrice === 'undefined') return null;
@@ -31,7 +33,7 @@ const Product = (product) => {
   return (
     <div className="product">
       <div className="thumb">
-        <Link to={`/product/${documentID}`}>
+        <Link to={`/product/${productCategory}/${productSubcategory}/${documentID}`}>
           <img src={productThumbnail} alt={productName} />
         </Link>
       </div>

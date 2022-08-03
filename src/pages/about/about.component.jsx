@@ -1,5 +1,14 @@
 import React from "react";
 import './about.styles.scss';
+import nmc from '../../assets/nmc.jpg';
+import acm from '../../assets/acm.png';
+import bluemarine from '../../assets/bluemarine.PNG';
+import emiliana from '../../assets/emiliana.png';
+import grandeco from '../../assets/grandeco.PNG';
+import soudal from '../../assets/soudal.PNG';
+import wallfix from '../../assets/wallfix.png';
+import mida from '../../assets/mida.PNG';
+import roberto from '../../assets/roberto.png';
 
 const About = () => {
     return (
@@ -21,31 +30,31 @@ const About = () => {
                 </div>
                 <div className="partners-list">
                     <div>
-                        <h4>NMC Romania</h4>
+                        <img src={nmc} alt="nmc logo" />
                     </div>
                     <div>
-                        <h4>Mida Pro Decor</h4>
+                        <img src={mida} alt="mida logo" />
                     </div>
                     <div>
-                        <h4>ACM Italy</h4>
+                        <img src={acm} alt="acm italy logo" />
                     </div>
                     <div>
-                        <h4>Industrie Emiiana Parati</h4>
+                        <img src={emiliana} alt="emiliana logo" />
                     </div>
                     <div>
-                        <h4></h4>
+                        <img src={soudal} alt="soudal logo" />
                     </div>
                     <div>
-                        <h4></h4>
+                        <img src={wallfix} alt="wallfix logo" />
                     </div>
                     <div>
-                        <h4>Grandeco</h4>
+                        <img src={grandeco} alt="grandeco logo" />
                     </div>
                     <div>
-                        <h4>Roberto Cavalli Home</h4>
+                        <img src={roberto} alt="roberto logo" />
                     </div>
                     <div>
-                        <h4>Blumarine Home</h4>
+                        <img src={bluemarine} alt="bluemarine logo" />
                     </div>
                 </div>
             </div>
