@@ -9,4 +9,28 @@
       margin: 0 0 2rem;
     }
   
+    .cartItemsContainer {
+      background-color: rgba(256, 256, 256, 0.35);
+      padding: 15px;
+    }
+    .cartItemsPayment {
+
+      div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 55px;
+        margin: 10px;
+      }
+
+      input {
+        opacity: 0;
+        position: absolute;
+        height: 0;
+        width: 0;
+      }
+      img {
+        width: 10%;
+      }
+    }
 }

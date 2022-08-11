@@ -4,13 +4,12 @@ footer {
     display: flex;
     justify-content: center;
     height: 350px;
-    background-color: white;
     box-shadow: 0px 2px 4px rgba(0,0,0,.1), 0px -2px 4px rgba(0,0,0,.1);
     line-height: 1.5;
-    background-color: #a59962;
+    background-color:rgba(111, 78, 55, 0.75);;
 
     a, h2 {
-        color: #333;
+        color: black;
 
     }
 
@@ -39,7 +38,7 @@ footer {
     justify-content: space-evenly;
     background-color: white;
     height: 200px;
-    background-color: #a59962;
+    background-color: rgba(111, 78, 55, 0.75);;
 
     .logo-social {
         display: flex;

@@ -1,5 +1,17 @@
 .admin {
     padding: 0 10px;
+
+    .selectContainer {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+
+      input {
+        height: 30px;
+      }
+    }
   
     .callToActions {
       display: inline-block;

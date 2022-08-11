@@ -1,10 +1,9 @@
 import React, {useState, useRef} from "react";
 import './contact.styles.scss';
 import ReCAPTCHA from "react-google-recaptcha";
-import Button from "../../components/forms/Button/button.component";
+import Button from "../../components/forms/button/button.component";
 import {Link} from 'react-router-dom';
 import emailjs from "@emailjs/browser";
-import { useEffect } from "react";
 
 const Contact = () => {
 
@@ -17,25 +16,19 @@ const Contact = () => {
     const [mesaj, setMesaj] = useState('');
     const [checked, setChecked] = useState(false);
 
+    const form = useRef();
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        let mess = {
-            titlu: 'Contact',
-            nume: name,
-            email,
-            telefon,
-            subiect,
-            mesaj
-        }
         const token = captchaRef?.current?.getValue();
-        // if(token && checked) {
-        //     emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_USER_ID')
-        //     .then((result) => {
-        //         console.log(result.text);
-        //     }, (error) => {
-        //         console.log(error.text);
-        //     });
-        // }
+        if(token && checked) {
+            emailjs.sendForm('WebMaster', 'template_v9oaihe', form.current, 'UbOV8YrnCmNIetu5j')
+            .then((result) => {
+                // console.log(result.text);
+            }, (error) => {
+                // console.log(error.text);
+            });
+        }
         captchaRef.current.reset();
     }
 
@@ -94,7 +87,7 @@ const Contact = () => {
                 </div>
             </div>
             <div className="form-container">
-                <form onSubmit={handleSubmit} className="contact-form">
+                <form onSubmit={handleSubmit} className="contact-form" ref={form}>
                     <h2>Formular de contact</h2>                    
                     <div className='txtb'>
                         <input 

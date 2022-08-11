@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { signOutUserStart } from '../../redux/User/user.actions';
+import { signOutUserStart } from '../../redux/user/user.actions';
 import { selectCartItemsCount } from './../../redux/Cart/cart.selectors';
 import {Link} from "react-router-dom";
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo-casa-royal.png';
 import './header.styles.scss';
 import ReactWhatsapp from "react-whatsapp";
 import whatsapp from '../../assets/whatsapp.svg';
@@ -87,12 +87,10 @@ const Header = props => {
                 </ReactWhatsapp>
             </div>
             <header className="header">
-                
                 <div className="header__content">
                     <div className="logo">
                         <Link to="/">
                             <img src={logo} alt="Logo" />
-                            <span>Casa Royal</span>
                         </Link>
                     </div>
                     <nav className={`header__content-nav ${menuOpen && size.width < 768 ? 'isMenu' : ''}`}>
@@ -103,66 +101,62 @@ const Header = props => {
                                 </Link>
                             </li>
                             <li>
-                                {/* <Link className="option" to="/search">
+                                <Button
+                                    id="basic-button"
+                                    to='/search'
+                                    aria-controls={open2 ? 'basic-menu' : undefined}
+                                    aria-haspopup="true"
+                                    aria-expanded={open2 ? 'true' : undefined}
+                                    onClick={handleClick2}
+                                    className="menu2"
+                                >
                                     PRODUSE
-                                </Link> */}
-                                        <Button
-                                            id="basic-button"
-                                            to='/search'
-                                            aria-controls={open2 ? 'basic-menu' : undefined}
-                                            aria-haspopup="true"
-                                            aria-expanded={open2 ? 'true' : undefined}
-                                            onClick={handleClick2}
-                                            className="menu2"
-                                        >
-                                            PRODUSE
-                                        </Button>
-                                        <Menu
-                                            id="basic-menu"
-                                            anchorEl={anchor2}
-                                            open={open2}
-                                            onClose={handleClose2}
-                                            MenuListProps={{
-                                            'aria-labelledby': 'basic-button',
-                                            }}
-                                            // transformOrigin={{ horizontal: 'left', vertical: 'top' }}
-                                            transformOrigin={{
-                                                vertical: -50,
-                                                horizontal: 50,
-                                              }}
-                                            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                        >
-                                            <MenuItem onClick={handleClose}>
-                                                <Link to="/search/tapet">
-                                                    Tapet
-                                                </Link>
-                                            </MenuItem>
-                                            <MenuItem onClick={handleClose}>
-                                                <Link to="/search/profile">
-                                                    Profile Decorative
-                                                </Link>
-                                            </MenuItem>
-                                            <MenuItem onClick={handleClose}>
-                                                <Link to="/search/mocheta">
-                                                    Mocheta
-                                                </Link>
-                                            </MenuItem>
-                                            <MenuItem onClick={handleClose}>
-                                                <Link to="/search/vopsea">
-                                                    Vopsea Decorativa
-                                                </Link>
-                                            </MenuItem>
-                                            <MenuItem onClick={handleClose}>
-                                                <Link to="/search/decoratiuni">
-                                                    Decoratiuni
-                                                </Link>
-                                            </MenuItem>
-                                            <MenuItem onClick={handleClose}>
-                                                <Link to="/search/adezivi">
-                                                    Adezivi
-                                                </Link>
-                                            </MenuItem>
-                                        </Menu>
+                                </Button>
+                                <Menu
+                                    id="basic-menu"
+                                    anchorEl={anchor2}
+                                    open={open2}
+                                    onClose={handleClose2}
+                                    MenuListProps={{
+                                    'aria-labelledby': 'basic-button',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: -50,
+                                        horizontal: 50,
+                                        }}
+                                    anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                >
+                                    <MenuItem onClick={handleClose}>
+                                        <Link to="/search/tapet">
+                                            Tapet
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                        <Link to="/search/profile">
+                                            Profile Decorative
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                        <Link to="/search/mocheta">
+                                            Mocheta
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                        <Link to="/search/vopsea">
+                                            Vopsea Decorativa
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                        <Link to="/search/decoratiuni">
+                                            Decoratiuni
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                        <Link to="/search/adezivi">
+                                            Adezivi
+                                        </Link>
+                                    </MenuItem>
+                                </Menu>
                             </li>
                             <li>
                                 <Link className="option" to="/about">
@@ -178,64 +172,62 @@ const Header = props => {
                         </ul>
                     </nav>
                     <div className="important">
+                        <li>
+                            <Link to="/cart" className="cart-header">
+                                <AiOutlineShoppingCart size={30} />
+                                <span>{totalNumCartItems > 0 && totalNumCartItems}</span>
+                            </Link>
+                        </li>
+                        {currentUser && (
+                            <>
+                                <Button
+                                    id="basic-button"
+                                    aria-controls={open ? 'basic-menu' : undefined}
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? 'true' : undefined}
+                                    onClick={handleClick}
+                                >
+                                    <AiOutlineUser size={30} />
+                                </Button>
+                                <Menu
+                                    id="basic-menu"
+                                    anchorEl={anchorEl}
+                                    open={open}
+                                    onClose={handleClose}
+                                    MenuListProps={{
+                                    'aria-labelledby': 'basic-button',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: -50,
+                                        horizontal: 50,
+                                        }}
+                                    anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                >
+                                    <MenuItem onClick={handleClose}>
+                                        <Link to="/dashboard">
+                                            Contul meu
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                        <button onClick={() => signOut()}>
+                                            <IoMdExit />
+                                            Delogare
+                                        </button>
+                                    </MenuItem>
+                                </Menu>
+                            </>
+                        )}
+                            
+                        {!currentUser && (
+                            <>
                                 <li>
-                                    <Link to="/cart" className="cart-header">
-                                        <AiOutlineShoppingCart size={30} />
-                                        <span>{totalNumCartItems > 0 && totalNumCartItems}</span>
+                                    <Link to="/login">
+                                        LOGIN
                                     </Link>
                                 </li>
-                                {currentUser && (
-                                    <>
-                                        <Button
-                                            id="basic-button"
-                                            aria-controls={open ? 'basic-menu' : undefined}
-                                            aria-haspopup="true"
-                                            aria-expanded={open ? 'true' : undefined}
-                                            onClick={handleClick}
-                                        >
-                                            <AiOutlineUser size={30} />
-                                        </Button>
-                                        <Menu
-                                            id="basic-menu"
-                                            anchorEl={anchorEl}
-                                            open={open}
-                                            onClose={handleClose}
-                                            MenuListProps={{
-                                            'aria-labelledby': 'basic-button',
-                                            }}
-                                            // transformOrigin={{ horizontal: 'left', vertical: 'top' }}
-                                            transformOrigin={{
-                                                vertical: -50,
-                                                horizontal: 50,
-                                              }}
-                                            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                        >
-                                            <MenuItem onClick={handleClose}>
-                                                <Link to="/dashboard">
-                                                    Contul meu
-                                                </Link>
-                                            </MenuItem>
-                                            
-                                            <MenuItem onClick={handleClose}>
-                                                <button onClick={() => signOut()}>
-                                                    <IoMdExit />
-                                                    Delogare
-                                                </button>
-                                            </MenuItem>
-                                        </Menu>
-                                    </>
-                                )}
-                            
-                                {!currentUser && (
-                                    <>
-                                        <li>
-                                            <Link to="/login">
-                                                LOGIN
-                                            </Link>
-                                        </li>
-                                    </>
-                                )}
-                            </div>
+                            </>
+                        )}
+                    </div>
                     <div className="header__content-toggle">
                         {!menuOpen ? (
                             <BiMenuAltRight onClick={menuToggleHandler} />

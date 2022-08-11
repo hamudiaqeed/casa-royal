@@ -5,7 +5,7 @@ import { selectCartItems, selectCartTotal } from './../../redux/Cart/cart.select
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import './styles.scss';
-import Button from './../forms/Button/button.component';
+import Button from './../forms/button/button.component';
 import Item from './Item';
 
 const mapState = createStructuredSelector({

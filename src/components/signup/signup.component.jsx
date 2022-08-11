@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './signup.styles.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { signUpUserStart } from '../../redux/User/user.actions';
+import { signUpUserStart } from '../../redux/user/user.actions';
 import { Link } from 'react-router-dom';
-import Button from '../forms/Button/button.component';
-import AuthWrapper from '../AuthWrapper';
+import Button from '../forms/button/button.component';
+import AuthWrapper from '../authWrapper/index';
+import { auth } from '../../firebase/utils';
 
 const mapState = ({user}) => ({
     currentUser: user.currentUser,
@@ -41,15 +42,32 @@ const SignUp = () => {
         }
     }, [userErr]);
 
-    const handleFormSubmit = e => {
+    const handleFormSubmit = async e => {
         e.preventDefault();
 
-        dispatch(signUpUserStart({
-            displayName,
-            email,
-            password,
-            confirmPassword
-        }));
+        if(checked) {
+            dispatch(signUpUserStart({
+                displayName,
+                email,
+                password,
+                confirmPassword
+            }));
+        }
+
+        try {
+            setError('');
+            await auth.createUserWithEmailAndPassword(email, password);
+        } catch (err) {
+            if(err && err.toString().includes('The email address is already in use by another')) {
+                setError('Utilizator deja existent.');
+            } else if (err && err.toString().includes('Password should be at least 6 characters')) {
+                setError('Parola trebuie sa contina cel putin 6 caractere.')
+            } else if (password !== confirmPassword) {
+                setError('Parolele nu se potrivesc.')
+            } else {
+                setError('Ceva nu a mers bine, va rugam reveniti mai tarziu');
+            }
+        }
     }
 
     const configAuthWrapper = {
@@ -64,6 +82,7 @@ const SignUp = () => {
                 }
                 <form onSubmit={handleFormSubmit} className="signup-form">
                     <h1>Sign Up</h1>
+                    <span className='error'>{error && error.toString()}</span>
                     <div className='txtb'>
                         <input 
                             type="text" 

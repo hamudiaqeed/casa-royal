@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
+import './orderhistory.styles.scss';
 
 const columns = [
   {
@@ -42,7 +43,7 @@ const OrderHistory = ({ orders }) => {
   const history = useHistory();
 
   return (
-    <TableContainer>
+    <TableContainer className='tableContainer'>
       <Table>
 
         <TableHead>

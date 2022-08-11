@@ -1,6 +1,6 @@
 import React from 'react';
 import './login.scss';
-import SignIn from '../../components/SignIn/signin.component';
+import SignIn from '../../components/signin/signin.component';
 
 const Login = (props) => {
     return (

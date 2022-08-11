@@ -14,7 +14,6 @@ const mapState = ({ productsData }) => ({
 const ProductResults = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  // const { filterType } = useParams();
   const { products } = useSelector(mapState);
   const [sub, setSub] = useState();
 
@@ -38,7 +37,6 @@ const ProductResults = () => {
   
       let ref = firestore.collectionGroup('products')
 
-      // if (filterType) ref = ref.where('productCategory', '==', filterType);  
       ref
         .get()
         .then(snapshot => {  
@@ -53,7 +51,6 @@ const ProductResults = () => {
   
           resolve({data});
           const subs = data.filter(d => d.documentID == subcategory)[0].tip
-          console.log(subs)
           setSub(subs);
         })
         .catch(err => {
@@ -61,46 +58,6 @@ const ProductResults = () => {
         })
     })
   }
-
-  // const handleFilter = (e) => {
-  //   const nextFilter = e.target.value;
-  //   history.push(`/search/${nextFilter}`);
-  // };
-
-  // if (!Array.isArray(data)) return null;
-  // if (data.length < 1) {
-  //   return (
-  //     <div className="products">
-  //       <p>
-  //         Niciun rezultat.
-  //       </p>
-  //     </div>
-  //   );
-  // }
-
-  // const configFilters = {
-  //   defaultValue: filterType,
-  //   options: [{
-  //     name: 'Show all',
-  //     value: ''
-  //   }, {
-  //     value: "tapet",
-  //     name: "Tapet"
-  //   }, {
-  //     value: "profile",
-  //     name: "Profile Decorative"
-  //   }, {
-  //     value: "mocheta",
-  //     name: "Mocheta"
-  //   }, {
-  //     value: "vopsea",
-  //     name: "Vopsea Decorativa"
-  //   }, {
-  //     value: "decoratiuni",
-  //     name: "Decoratiuni"
-  //   }],
-  //   handleChange: handleFilter
-  // };
 
   const handleLoadMore = () => {
     let startAfterDoc = queryDoc;

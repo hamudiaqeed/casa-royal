@@ -18,11 +18,19 @@
   }
 
   .subcategorie {
-
     img {
       width: 100%;
       max-height: 65%;
       min-height: 65%;
+    }
+    
+    a {
+      p {
+        background-color: rgba(256, 256, 256, 0.45);
+        margin: 0;
+        font-weight: bold;
+        text-align: center;
+      }
     }
   }
   
@@ -30,7 +38,6 @@
     max-width: 350px;
     margin: 0 auto 2rem;
     padding: 10px;
-    // border: 1px solid black;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-color: white;
     

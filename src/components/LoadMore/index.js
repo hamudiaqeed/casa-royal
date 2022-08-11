@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './../forms/Button/button.component';
+import Button from './../forms/button/button.component';
 
 const LoadMore = ({
   onLoadMoreEvt = () => { },

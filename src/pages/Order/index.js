@@ -30,12 +30,11 @@ const Order = () => {
         Order ID: #{orderID}
       </h1>
 
-      <OrderDetails order={orderDetails} />
+      <OrderDetails order={orderDetails} orderID={orderID} />
 
       <h3>
         Total: {orderTotal}
       </h3>
-
     </div>
   )
 

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Category from "../Category/category.component";
+import Category from "../category/category.component";
 import './directory.styles.scss';
 import {MdReplay} from 'react-icons/md';
 import {FaTruck} from 'react-icons/fa';
@@ -95,14 +95,6 @@ const Directory = () => {
                 <p>Oferim consultanță telefonică clienților noștri pentru alegerea produselor potrivite.</p>
               </div>
             </div>
-          </div>
-
-          <div className="parallax">
-              <div>
-                <p>
-                  Casa Royal este distribuitorul roman al unor branduri internationale sonore ca Roberto Cavalli Home, Blumarine Home, Industrie Emiiana Parati, Design ID, Adi, Tekko, ACM, MATERIA, Zambaiti Parati - Murella, Sirpi, Selecta Parati - Portofino, Grandeco Wallfashion, Graham & Brown, si multe altele. Ne dorim ca prezenta noastra pe piata romaneasca sa ii inspire pe clienti sa aprecieze calitatea, luxul si unicitatea designului la justa lor valoare.
-                </p>
-              </div>
           </div>
 
           <div className="avantaje">

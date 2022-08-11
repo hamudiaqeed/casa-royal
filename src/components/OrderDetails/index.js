@@ -1,10 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import './orderDetails.styles.scss';
 import {
   TableContainer, Table, TableHead,
   TableBody, TableRow, TableCell
 } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { setOrderDetails } from './../../redux/Orders/orders.actions';
+import { setOrderDetails, setOrderStatus, getOrderDetailsStart } from './../../redux/Orders/orders.actions';
+import { checkUserIsAdmin } from '../../utils/index';
+import { useSelector } from "react-redux/es/exports";
+import FormSelect from '../forms/FormSelect/index';
+
+const mapState = ({user}) => ({
+  currentUser: user.currentUser
+}) 
 
 const columns = [
   {
@@ -64,10 +72,14 @@ const formatText = (columnName, columnValue) => {
   }
 }
 
-const OrderDetails = ({ order }) => {
+const OrderDetails = ({ order, orderID }) => {
   const dispatch = useDispatch();
   const orderItems = order && order.orderItems;
   const orderInfo = order && order.orderInfo;
+  const orderStatus = order && order.orderStatus;
+  const {currentUser} = useSelector(mapState);
+
+  const isAdmin = checkUserIsAdmin(currentUser);
 
   useEffect(() => {
     return () => {
@@ -76,9 +88,9 @@ const OrderDetails = ({ order }) => {
       );
     }
   }, []);
-
+  
   return (
-    <TableContainer>
+    <TableContainer className='tableContainer'>
       <Table>
 
         <TableHead>
@@ -94,7 +106,6 @@ const OrderDetails = ({ order }) => {
                 </TableCell>
               )
             })}
-
           </TableRow>
         </TableHead>
 
@@ -165,6 +176,34 @@ const OrderDetails = ({ order }) => {
           })}
         </TableBody>
       </Table>
+      {
+        isAdmin ? (
+          <>
+            <h3>Status actual: {order.orderStatus}</h3>
+            <FormSelect
+              label="Schimba Status Comanda"
+              options={[{
+                value: "plasata",
+                name: "Plasata"
+              }, {
+                value: "procesare",
+                name: "Procesare"
+              }, {
+                value: "finalizata",
+                name: "Finalizata"
+              }]}
+              onChange={e => {dispatch(
+                setOrderStatus(orderID, e.target.value)
+              );
+              dispatch(
+                getOrderDetailsStart(orderID)
+              );}}
+            />
+          </>
+        ) : (
+          <h3>Status: <span className={orderStatus}>{orderStatus}</span></h3>
+        )
+      }
     </TableContainer>
   )
 }

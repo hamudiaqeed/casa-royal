@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductStart, setProduct } from './../../redux/Products/products.actions';
 import { addProduct } from './../../redux/Cart/cart.actions';
-import Button from './../forms/Button/button.component';
+import Button from './../forms/button/button.component';
 import './styles.scss';
 
 const mapState = ({productsData}) => ({

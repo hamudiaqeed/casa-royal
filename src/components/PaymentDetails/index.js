@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import FormInput from './../forms/FormInput/forminput.component';
-import Button from './../forms/Button/button.component';
+import React, { useState, useEffect, useRef } from 'react';
+import FormInput from './../forms/formInput/forminput.component';
+import Button from './../forms/button/button.component';
 import { selectCartTotal, selectCartItemsCount, selectCartItems } from './../../redux/Cart/cart.selectors';
 import { saveOrderHistory } from './../../redux/Orders/orders.actions';
 import { createStructuredSelector } from 'reselect';
 import { useSelector, useDispatch } from 'react-redux';
-import Item from '../Checkout/Item';
 import { useHistory } from 'react-router-dom';
 import './styles.scss';
+import emailjs from "@emailjs/browser";
 
 const initialAddressState = {
   nume: '',
@@ -28,6 +28,7 @@ const PaymentDetails = () => {
   const { total, itemCount, cartItems } = useSelector(mapState);
   const dispatch = useDispatch();
   const [shippingAddress, setShippingAddress] = useState({ ...initialAddressState });
+  const form = useRef();
 
   useEffect(() => {
     if (itemCount < 1) {
@@ -69,6 +70,7 @@ const PaymentDetails = () => {
           quantity
         };
       }),
+      orderStatus: 'Plasata',
       orderInfo: [
         {
           nume: shippingAddress.nume,
@@ -80,6 +82,13 @@ const PaymentDetails = () => {
       ]
     }
 
+    emailjs.sendForm('WebMaster', 'template_es1x0v9', form.current, 'UbOV8YrnCmNIetu5j')
+        .then((result) => {
+            // console.log(result.text);
+        }, (error) => {
+            // console.log(error.text);
+        });
+
     dispatch(
       saveOrderHistory(configOrder)
     );
@@ -88,7 +97,7 @@ const PaymentDetails = () => {
 
   return (
     <div className="paymentDetails">
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} ref={form}>
         <div className="group">
           <h2>
             Detalii comanda
@@ -137,16 +146,40 @@ const PaymentDetails = () => {
             value={shippingAddress.telefon}
             type="text"
           />
+          <div className='cartItemsContainer'>
           {cartItems.map((item, pos) => {
             return (
-              <div>
-                <h3>{item.productName}</h3>
-                <p>{item.quantity}</p>
-                <p>{item.productPrice} RON</p>
-                
+              <div className='cartItemsPayment'>
+                <div>
+                  <h3>Nume produs: {item.productName}</h3>
+                  <img src={item.productThumbnail} alt={item.productName} />
+                  <p>Cantitate: {item.quantity}</p>
+                  <p>Pret/bucata: {item.productPrice} RON</p>
+                </div>
+                <FormInput 
+                  type="text"
+                  name="productName"
+                  value={item.productName}
+                />
+                <FormInput 
+                  type="text"
+                  name="quantity"
+                  value={item.quantity}
+                />
+                <FormInput 
+                  type="text"
+                  name="productPrice"
+                  value={item.productPrice}
+                />
+                <FormInput 
+                  type="text"
+                  name="total"
+                  value={total}
+                />
               </div>
             )
           })}
+          </div>
           <h3>Total: {total} RON</h3>
         </div>
         <Button

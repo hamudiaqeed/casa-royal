@@ -15,6 +15,21 @@ export const handleSaveOrder = order => {
   });
 };
 
+export const handleOrderStatus = ({orderID, status}) => {
+  return new Promise((resolve, reject) => {
+  firestore
+    .collection('orders')
+    .doc(orderID)
+    .update({orderStatus: status})
+    .then(() => {
+      resolve();
+    })
+    .catch(err => {
+      reject(err);
+    });
+  });
+};
+
 export const handleGetUserOrderHistory = ({uid, role}) => {
   return new Promise((resolve, reject) => {
     let ref;
@@ -25,9 +40,6 @@ export const handleGetUserOrderHistory = ({uid, role}) => {
       ref = firestore.collection('orders').orderBy('orderCreatedDate');
       ref = ref.where('orderUserID', '==', uid);
     }
-
-    
-
     ref
       .get()
       .then(snap => {

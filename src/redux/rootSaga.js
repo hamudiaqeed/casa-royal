@@ -1,6 +1,6 @@
 import { all, call } from 'redux-saga/effects';
 
-import userSagas from './User/user.sagas';
+import userSagas from './user/user.sagas';
 import productsSagas from './Products/products.sagas';
 import ordersSagas from './Orders/orders.sagas';
 

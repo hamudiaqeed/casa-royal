@@ -7,10 +7,32 @@
         margin: 50px auto;
     }
 
+    .about-1 {
+        font-size: 18px;
+        background-color: rgba(256, 256, 256, 0.35);
+        padding: 15px;
+
+        p {
+            text-indent: 30px;
+        }
+    }
+
+    .partners-header {
+        p {
+            text-indent: 30px;
+            font-size: 18px;
+        }
+    }
+
     .about-p {
         text-align: center;
         margin: 50px;
     }
+
+    // .partners {
+    //     width: 50%;
+    //     margin: 0 auto;
+    // }
 
     .partners-list {
 
@@ -18,9 +40,9 @@
         grid-template-columns: 1fr 1fr 1fr; 
         justify-items: center;
         gap: 30px;
-        width: 50%;
+        // width: 50%;
         position: relative;
-        margin: 0 auto;
+        // margin: 0 auto;
 
         img {
             width: 100%;

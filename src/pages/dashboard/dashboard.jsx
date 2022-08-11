@@ -21,7 +21,7 @@ const Dashboard = props => {
   }, []);
 
   return (
-    <div>
+    <div className='dashboard-container'>
       <h1>
         Order History
       </h1>

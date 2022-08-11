@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProductStart, fetchProductsStart, deleteProductStart } from './../../redux/Products/products.actions';
 import Modal from './../../components/Modal';
-import FormInput from './../../components/forms/FormInput/forminput.component';
+import FormInput from './../../components/forms/formInput/forminput.component';
 import FormSelect from './../../components/forms/FormSelect';
-import Button from './../../components/forms/Button/button.component';
+import Button from './../../components/forms/button/button.component';
 import LoadMore from './../../components/LoadMore';
 import {CKEditor} from 'ckeditor4-react';
 import './admin.styles.scss';
 import OrderHistory from '../../components/OrderHistory';
 import { getUserOrderHistory } from './../../redux/Orders/orders.actions';
+import { firestore } from '../../firebase/utils';
+import firebase from 'firebase/compat/app';
 
 const mapState = ({ productsData, user, ordersData }) => ({
   products: productsData.products,
@@ -21,17 +23,89 @@ const Admin = props => {
   const { products, currentUser, orderHistory } = useSelector(mapState);
   const dispatch = useDispatch();
   const [hideModal, setHideModal] = useState(true);
-  const [productCategory, setProductCategory] = useState('tapet');
-  const [productSubcategory, setProductSubcategory] = useState('interior');
+  const [productCategory, setProductCategory] = useState('');
+  const [productSubcategory, setProductSubcategory] = useState('');
   const [productName, setProductName] = useState('');
   const [productCode, setProductCode] = useState('');
   const [productThumbnail, setProductThumbnail] = useState('');
   const [productPrice, setProductPrice] = useState(0);
   const [productDesc, setProductDesc] = useState('');
-  const [productCategoryFilter, setProductCategoryFilter] = useState('tapet');
-  const [productSubcategoryFilter, setproductSubcategoryFilter] = useState('interior');
+  const [productCategoryFilter, setProductCategoryFilter] = useState('');
+  const [productSubcategoryFilter, setproductSubcategoryFilter] = useState('');
+
+  //filter
+
+  const [categoryFilter, setCategoryFilter] = useState('');
+  const [subcategoryFilter, setSubcategoryFilter] = useState('');
 
   const { data, queryDoc, isLastPage } = products;
+
+  //new
+  const [newSubcategory, setNewSubcategory] = useState('');
+  const [productSubcategoryThumbnail ,setProductSubcategoryThumbnail] = useState('');
+
+  const getCategory = () => {
+    let ref = firestore.collectionGroup('products')
+    ref
+      .get()
+      .then(snapshot => {
+
+        const data = [
+          ...snapshot.docs.map(doc => {
+            return {
+              ...doc.data(),
+              documentID: {value: doc.id, name: doc.id}
+            }
+          })
+        ];
+
+        const items = data.map(el => el.documentID);
+
+        setCategoryFilter(items)
+
+
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+  const getSubCategory = () => {
+    let ref = firestore.collectionGroup('products');
+
+    ref
+      .get("tip")
+      .then(snapshot => {
+
+        const data = [
+          ...snapshot.docs.map(doc => {
+            return {
+              ...doc.data()
+            }
+          })
+        ];
+
+        const items = data.map(d => d.tip);
+
+        let subcateg = [];
+
+        for (var i = 0; i < items.length; i++) {
+          for (var j = 0; j < items[i].length; j++) {
+              subcateg.push(items[i][j])
+          }
+        }
+        let subcategories = subcateg.map(sub => {
+          return {
+            value: sub.tip,
+            name: sub.tip
+          }
+        })
+        setSubcategoryFilter(subcategories)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
 
   useEffect(() => {
     dispatch(
@@ -43,6 +117,8 @@ const Admin = props => {
     dispatch(
       getUserOrderHistory(currentUser.id, currentUser.userRoles[1])
     );
+    getCategory();
+    getSubCategory();
   }, []);
 
   const toggleModal = () => setHideModal(!hideModal);
@@ -63,6 +139,10 @@ const Admin = props => {
     setProductDesc('');
   };
 
+  const handleAddSubcategory = () => {
+    setSubcategoryFilter([...subcategoryFilter, {["name"]: newSubcategory, ["value"]: newSubcategory}]);
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -77,6 +157,25 @@ const Admin = props => {
         productDesc,
       })
     );
+
+    if(productSubcategoryThumbnail && newSubcategory) {
+      firestore
+      .collection('products')
+      .doc(productCategory)
+      .update({ tip: firebase.firestore.FieldValue.arrayUnion({
+        "imagine": productSubcategoryThumbnail,
+        "tip": newSubcategory
+      })})
+      .then(() => {
+        // console.log('ssuc')
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+
+    setNewSubcategory('');
+    setProductSubcategoryThumbnail('');
     resetForm();
 
   };
@@ -115,116 +214,45 @@ const Admin = props => {
         </ul>
       </div>
       <FormSelect
-              label="Categorie"
-              options={[{
-                value: "tapet",
-                name: "Tapet"
-              }, {
-                value: "profile",
-                name: "Profile Decorative"
-              }, {
-                value: "mocheta",
-                name: "Mocheta"
-              }, {
-                value: "vopsea",
-                name: "Vopsea Decorativa"
-              }, {
-                value: "decoratiuni",
-                name: "Decoratiuni"
-              }, {
-                value: "adezivi",
-                name: "Adezivi"
-              }]}
-              onChange={e => setProductCategoryFilter(e.target.value)}
-            />
-            <FormSelect
-              label="Subcategorie"
-              options={[{
-                value: "interior",
-                name: "Interior"
-              }, {
-                value: "exterior",
-                name: "Exterior"
-              }, {
-                value: "mocheta",
-                name: "Mocheta"
-              }, {
-                value: "plinte",
-                name: "Plinte"
-              }, {
-                value: "decoratiuni",
-                name: "Decoratiuni"
-              }, {
-                value: "adezivi",
-                name: "Adezivi"
-              }, {
-                value: "Roberto Cavali No. 8",
-                name: "Roberto Cavali No. 8"
-              }, {
-                value: "Roberto Cavali No. 7",
-                name: "Roberto Cavali No. 7"
-              }]}
-              onChange={e => setproductSubcategoryFilter(e.target.value)}
-            />
+        label="Categorie"
+        options={categoryFilter}
+        onChange={e => setProductCategoryFilter(e.target.value)}
+      />
+      <FormSelect
+        label="Subcategorie"
+        options={subcategoryFilter}
+        onChange={e => setproductSubcategoryFilter(e.target.value)}
+      />
 
       <Modal {...configModal}>
         <div className="addNewProductForm">
-          
           <form onSubmit={handleSubmit}>
-
-            <h2>
-              Adauga produs
-            </h2>
-
+            <h2>Adauga produs</h2>
             <FormSelect
               label="Categorie"
-              options={[{
-                value: "tapet",
-                name: "Tapet"
-              }, {
-                value: "profile",
-                name: "Profile Decorative"
-              }, {
-                value: "mocheta",
-                name: "Mocheta"
-              }, {
-                value: "vopsea",
-                name: "Vopsea Decorativa"
-              }, {
-                value: "decoratiuni",
-                name: "Decoratiuni"
-              }, {
-                value: "adezivi",
-                name: "Adezivi"
-              }]}
+              options={categoryFilter}
               handleChange={e => setProductCategory(e.target.value)}
             />
+            <div className='selectContainer'>
+              <FormSelect
+                label="Subcategorie"
+                options={subcategoryFilter}
+                handleChange={e => setProductSubcategory(e.target.value)}
+              />
+              <input 
+                type="text" 
+                placeholder='Adauga alta subcategorie' 
+                value={newSubcategory}
+                onChange={(e) => setNewSubcategory(e.target.value)}
+              />
+              <button onClick={handleAddSubcategory}>Adauga Subcategorie</button>
+            </div>
 
-            <FormSelect
-              label="Subcategorie"
-              options={[{
-                value: "interior",
-                name: "Interior"
-              }, {
-                value: "exterior",
-                name: "Exterior"
-              }, {
-                value: "cornise",
-                name: "Cornise"
-              }, {
-                value: "plinte",
-                name: "Plinte"
-              }, {
-                value: "brauri",
-                name: "Brauri"
-              }, {
-                value: "Roberto Cavali No. 8",
-                name: "Roberto Cavali No. 8"
-              }, {
-                value: "Roberto Cavali No. 7",
-                name: "Roberto Cavali No. 7"
-              }]}
-              handleChange={e => setProductSubcategory(e.target.value)}
+            <FormInput
+              label="URL Imagine Subcategorie"
+              type="url"
+              value={productSubcategoryThumbnail}
+              handleChange={e => setProductSubcategoryThumbnail(e.target.value)}
             />
 
             <FormInput
@@ -272,7 +300,6 @@ const Admin = props => {
         </div>
       </Modal>
       <div className="manageProducts">
-
         <table border="0" cellPadding="0" cellSpacing="0">
           <tbody>
             <tr>
