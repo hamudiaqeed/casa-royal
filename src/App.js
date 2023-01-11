@@ -37,8 +37,7 @@ import DashboardLayout from './layouts/DashboardLayout';
 const App = () => {
 
   const dispatch = useDispatch();
-  const TRACKING_ID = "G-G9114NXMXP";
-  ReactGA.initialize(TRACKING_ID);
+  ReactGA.initialize(process.env.REACT_APP_GA_KEY);
 
   useEffect(() => {
     dispatch(checkUserSession());

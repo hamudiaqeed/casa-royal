@@ -82,7 +82,7 @@ const PaymentDetails = () => {
       ]
     }
 
-    emailjs.sendForm('WebMaster', 'template_es1x0v9', form.current, 'UbOV8YrnCmNIetu5j')
+    emailjs.sendForm('WebMaster', 'template_es1x0v9', form.current, process.env.REACT_APP_EMAILJS_KEY)
         .then((result) => {
             // console.log(result.text);
         }, (error) => {

@@ -161,6 +161,7 @@
       transition: 0.3s ease all;
       position: relative;
       margin-left: 10px;
+      margin-right: 10px;
 
       svg {
         fill: black;
@@ -284,7 +285,29 @@
 }
 
 @media only screen and (max-width: 664px) {
+  .login-nouser {
+    a {
+      font-size: 16px;
+    }
+  }
+
+  .cart-header {
+    svg {
+      height: 25px!important;
+    } 
+  }
+
+  .important {
+    gap: 10px!important;
+  }
+
   .logo {
     width: auto!important;
+    a {
+      img {
+        width: 50%!important;
+        height: auto;
+      }
+    }
   }
 }

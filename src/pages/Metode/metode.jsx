@@ -3,7 +3,7 @@ import './metode.styles.scss';
 
 const Metode = () => {
     return (
-        <div>
+        <div className="metode-container">
             <h2>Metode de Plata</h2>
             <p>Deoarece suntem flexibili le acordăm clienților noștri șansa de a-și alege metoda de plată potrivită:</p>
 

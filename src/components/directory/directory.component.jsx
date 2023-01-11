@@ -48,7 +48,7 @@ const Directory = () => {
           imageUrl: adeziv,
           id: 6,
           bg: 'bg',
-          linkUrl: 'search/decoratiuni'
+          linkUrl: 'search/adezivi'
         }
     ]);
 

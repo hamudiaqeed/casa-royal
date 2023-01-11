@@ -54,18 +54,20 @@ const SignUp = () => {
             }));
         }
 
-        try {
-            setError('');
-            await auth.createUserWithEmailAndPassword(email, password);
-        } catch (err) {
-            if(err && err.toString().includes('The email address is already in use by another')) {
-                setError('Utilizator deja existent.');
-            } else if (err && err.toString().includes('Password should be at least 6 characters')) {
-                setError('Parola trebuie sa contina cel putin 6 caractere.')
-            } else if (password !== confirmPassword) {
-                setError('Parolele nu se potrivesc.')
-            } else {
-                setError('Ceva nu a mers bine, va rugam reveniti mai tarziu');
+        if(checked && email && password) {
+            try {
+                setError('');
+                await auth.createUserWithEmailAndPassword(email, password);
+            } catch (err) {
+                if(err && err.toString().includes('The email address is already in use by another')) {
+                    setError('Utilizator deja existent.');
+                } else if (err && err.toString().includes('Password should be at least 6 characters')) {
+                    setError('Parola trebuie sa contina cel putin 6 caractere.')
+                } else if (password !== confirmPassword) {
+                    setError('Parolele nu se potrivesc.')
+                } else {
+                    setError('Ceva nu a mers bine, va rugam reveniti mai tarziu');
+                }
             }
         }
     }

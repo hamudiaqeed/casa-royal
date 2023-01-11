@@ -31,19 +31,22 @@ const SignIn = () => {
 
     const handleSubmit = async e => {
         e.preventDefault();
+        dispatch(emailSignInStart({ email, password }));
 
-        try {
-            setError('');
-            await auth.signInWithEmailAndPassword(email, password);
-        } catch (err) {
-            if(err && err.toString().includes('There is no user record corresponding to this identifier.')) {
-                setError('Utilizator inexistent.');
-            } else if (err && err.toString().includes('The password is invalid or the user does not have a password.')) {
-                setError('Parola incorecta.')
-            } else if (err && err.toString().includes('Access to this account has been temporarily disabled due to many failed login attempts.')) {
-                setError('Parola a fost introdusa gresita de mai multe ori. Va rugam incercati mai tarziu.')
-            } else {
-                setError('Ceva nu a mers bine, va rugam reveniti mai tarziu');
+        if(email && password) {
+            try {
+                setError('');
+                await auth.signInWithEmailAndPassword(email, password);
+            } catch (err) {
+                if(err && err.toString().includes('There is no user record corresponding to this identifier.')) {
+                    setError('Utilizator inexistent.');
+                } else if (err && err.toString().includes('The password is invalid or the user does not have a password.')) {
+                    setError('Parola incorecta.')
+                } else if (err && err.toString().includes('Access to this account has been temporarily disabled due to many failed login attempts.')) {
+                    setError('Parola a fost introdusa gresita de mai multe ori. Va rugam incercati mai tarziu.')
+                } else {
+                    setError('Ceva nu a mers bine, va rugam reveniti mai tarziu');
+                }
             }
         }
     

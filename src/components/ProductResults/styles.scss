@@ -18,10 +18,13 @@
   }
 
   .subcategorie {
+    margin: 0 auto;
     img {
-      width: 100%;
+      width: 350px;
       max-height: 65%;
-      min-height: 65%;
+      max-width: 350px!important;
+      max-height: 350px!important;
+      min-height: 350px!important;
     }
     
     a {
@@ -30,6 +33,8 @@
         margin: 0;
         font-weight: bold;
         text-align: center;
+        max-width: 350px;
+        max-height: 350px;
       }
     }
   }
@@ -149,5 +154,25 @@
           }
         }
       }
+  }
+
+  @media screen and (max-width: 480px) {
+    .subcategorie {
+      margin: 0 auto;
+      img {
+        width: 100%;
+        height: auto;
+        max-height: 100%!important;
+        max-width: 100%!important;
+        min-height: 100%!important;
+      }
+      
+      a {
+        p {
+          max-width: auto;
+          max-height: auto;
+        }
+      }
+    }
   }
   

@@ -1,5 +1,6 @@
 {
   "name": "casa-royal",
+  "homepage": "https://casaroyal.ro/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

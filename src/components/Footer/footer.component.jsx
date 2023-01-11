@@ -23,8 +23,7 @@ const Footer = () => {
                         <h2>Linkuri Utile</h2>
                         <Link to='/search/tapet'>Colectii tapet</Link>
                         <Link to='/search/mocheta'>Colectii mocheta</Link>
-                        <Link to='/search/decoratiuni'>Decoratiuni interioare</Link>
-                        <Link to='/search/decoratiuni'>Decoratiuni exterioare</Link>
+                        <Link to='/search/decoratiuni'>Decoratiuni</Link>
                         <Link to='/search/vopsea'>Vopsele decorative</Link>
                         <Link to="/search/adezivi">Adezivi</Link>
                     </div>

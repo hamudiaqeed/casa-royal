@@ -1,5 +1,5 @@
 export const firebaseConfig = {
-    apiKey: "AIzaSyAXhbGzsMqX1n54xqFElT6wv0q6LKPzQQc",
+    apiKey: process.env.REACT_APP_FIREBASE_KEY,
     authDomain: "casa-royal-cad5f.firebaseapp.com",
     projectId: "casa-royal-cad5f",
     storageBucket: "casa-royal-cad5f.appspot.com",

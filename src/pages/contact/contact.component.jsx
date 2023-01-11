@@ -15,6 +15,7 @@ const Contact = () => {
     const [subiect, setSubiect] = useState('');
     const [mesaj, setMesaj] = useState('');
     const [checked, setChecked] = useState(false);
+    const [message, setMessage] = useState('');
 
     const form = useRef();
 
@@ -22,11 +23,12 @@ const Contact = () => {
         e.preventDefault();
         const token = captchaRef?.current?.getValue();
         if(token && checked) {
-            emailjs.sendForm('WebMaster', 'template_v9oaihe', form.current, 'UbOV8YrnCmNIetu5j')
+            setMessage('');
+            emailjs.sendForm('WebMaster', 'template_v9oaihe', form.current, process.env.REACT_APP_EMAILJS_KEY)
             .then((result) => {
-                // console.log(result.text);
+                setMessage('Mesaj trimis.')
             }, (error) => {
-                // console.log(error.text);
+                setMessage('Ceva nu a mers bine, va rugam incercati mai tarziu.')
             });
         }
         captchaRef.current.reset();
@@ -88,7 +90,8 @@ const Contact = () => {
             </div>
             <div className="form-container">
                 <form onSubmit={handleSubmit} className="contact-form" ref={form}>
-                    <h2>Formular de contact</h2>                    
+                    <h2>Formular de contact</h2>
+                    <p>{message && message}</p>               
                     <div className='txtb'>
                         <input 
                             type="text" 
@@ -154,7 +157,7 @@ const Contact = () => {
                         <label htmlFor="tc">Sunt de acord si accept <Link to='/confidentialitate' className="underline">Politica de Confidentialitate</Link></label>
                     </div>
                     <ReCAPTCHA
-                        sitekey="6LdKDzwhAAAAAIJj-YozmvqpOmaFJ66HfsLu4_Ar"
+                        sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
                         ref={captchaRef}
                         style={{transform: "scale(0.77)", transformOrigin: "0 0"}}
                     />

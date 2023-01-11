@@ -75,13 +75,13 @@ const Header = props => {
     }, [size.width, menuOpen]);
 
     const menuToggleHandler = () => {
-        setMenuOpen((p) => !p);
+        setMenuOpen(!menuOpen);
     };
 
     return (
         <>
             <div className="whatsapp">
-                <ReactWhatsapp number="0734802222">
+                <ReactWhatsapp number="+40734802222">
                     <img src={whatsapp} alt="whatsapp logo" />
                     Contacteaza-ne si prin WhatsApp
                 </ReactWhatsapp>
@@ -95,16 +95,15 @@ const Header = props => {
                     </div>
                     <nav className={`header__content-nav ${menuOpen && size.width < 768 ? 'isMenu' : ''}`}>
                         <ul>
-                            <li>
+                            <li onClick={menuToggleHandler}>
                                 <Link className="option" to="/">
                                     HOME
                                 </Link>
                             </li>
                             <li>
                                 <Button
-                                    id="basic-button"
-                                    to='/search'
-                                    aria-controls={open2 ? 'basic-menu' : undefined}
+                                    id="basic-button-2"
+                                    aria-controls={open2 ? 'basic-menu-2' : undefined}
                                     aria-haspopup="true"
                                     aria-expanded={open2 ? 'true' : undefined}
                                     onClick={handleClick2}
@@ -113,12 +112,13 @@ const Header = props => {
                                     PRODUSE
                                 </Button>
                                 <Menu
-                                    id="basic-menu"
+                                    id="basic-menu-2"
                                     anchorEl={anchor2}
                                     open={open2}
                                     onClose={handleClose2}
+                                    onClick={menuToggleHandler}
                                     MenuListProps={{
-                                    'aria-labelledby': 'basic-button',
+                                    'aria-labelledby': 'basic-button-2',
                                     }}
                                     transformOrigin={{
                                         vertical: -50,
@@ -126,44 +126,44 @@ const Header = props => {
                                         }}
                                     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 >
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem onClick={handleClose2}>
                                         <Link to="/search/tapet">
                                             Tapet
                                         </Link>
                                     </MenuItem>
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem onClick={handleClose2}>
                                         <Link to="/search/profile">
                                             Profile Decorative
                                         </Link>
                                     </MenuItem>
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem onClick={handleClose2}>
                                         <Link to="/search/mocheta">
                                             Mocheta
                                         </Link>
                                     </MenuItem>
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem onClick={handleClose2}>
                                         <Link to="/search/vopsea">
                                             Vopsea Decorativa
                                         </Link>
                                     </MenuItem>
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem onClick={handleClose2}>
                                         <Link to="/search/decoratiuni">
                                             Decoratiuni
                                         </Link>
                                     </MenuItem>
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem onClick={handleClose2}>
                                         <Link to="/search/adezivi">
                                             Adezivi
                                         </Link>
                                     </MenuItem>
                                 </Menu>
                             </li>
-                            <li>
+                            <li onClick={menuToggleHandler}>
                                 <Link className="option" to="/about">
                                     DESPRE
                                 </Link>
                             </li>
-                            <li>
+                            <li onClick={menuToggleHandler}>
                                 <Link className="option" to="/contact">
                                     CONTACT
                                 </Link>
@@ -220,7 +220,7 @@ const Header = props => {
                             
                         {!currentUser && (
                             <>
-                                <li>
+                                <li className="login-nouser">
                                     <Link to="/login">
                                         LOGIN
                                     </Link>
